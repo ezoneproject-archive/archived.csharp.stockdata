@@ -39,10 +39,11 @@
             this.listDataTypes = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
             this.listDataTimes = new System.Windows.Forms.ListBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.datePicker = new System.Windows.Forms.DateTimePicker();
             this.listParseView = new System.Windows.Forms.ListView();
             this.btnRegister = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -63,7 +64,7 @@
             // 
             // btnOpenFile
             // 
-            this.btnOpenFile.Location = new System.Drawing.Point(345, 6);
+            this.btnOpenFile.Location = new System.Drawing.Point(345, 5);
             this.btnOpenFile.Name = "btnOpenFile";
             this.btnOpenFile.Size = new System.Drawing.Size(85, 23);
             this.btnOpenFile.TabIndex = 2;
@@ -77,15 +78,15 @@
             this.txtFileName.Name = "txtFileName";
             this.txtFileName.ReadOnly = true;
             this.txtFileName.Size = new System.Drawing.Size(267, 21);
-            this.txtFileName.TabIndex = 5;
+            this.txtFileName.TabIndex = 4;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 37);
+            this.label2.Location = new System.Drawing.Point(12, 38);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 12);
-            this.label2.TabIndex = 6;
+            this.label2.TabIndex = 3;
             this.label2.Text = "파일명";
             // 
             // label3
@@ -94,7 +95,7 @@
             this.label3.Location = new System.Drawing.Point(12, 65);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
-            this.label3.TabIndex = 7;
+            this.label3.TabIndex = 5;
             this.label3.Text = "종류";
             // 
             // label4
@@ -111,9 +112,10 @@
             this.btnNewDesign.Location = new System.Drawing.Point(345, 174);
             this.btnNewDesign.Name = "btnNewDesign";
             this.btnNewDesign.Size = new System.Drawing.Size(85, 23);
-            this.btnNewDesign.TabIndex = 11;
+            this.btnNewDesign.TabIndex = 14;
             this.btnNewDesign.Text = "신규 ...";
             this.btnNewDesign.UseVisualStyleBackColor = true;
+            this.btnNewDesign.Click += new System.EventHandler(this.btnNewDesign_Click);
             // 
             // listDataTypes
             // 
@@ -122,16 +124,16 @@
             this.listDataTypes.Location = new System.Drawing.Point(72, 61);
             this.listDataTypes.Name = "listDataTypes";
             this.listDataTypes.Size = new System.Drawing.Size(267, 136);
-            this.listDataTypes.TabIndex = 12;
+            this.listDataTypes.TabIndex = 6;
             this.listDataTypes.SelectedIndexChanged += new System.EventHandler(this.listDataTypes_SelectedIndexChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 209);
+            this.label5.Location = new System.Drawing.Point(12, 207);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(53, 12);
-            this.label5.TabIndex = 13;
+            this.label5.TabIndex = 7;
             this.label5.Text = "자료일자";
             // 
             // listDataTimes
@@ -141,14 +143,14 @@
             this.listDataTimes.Location = new System.Drawing.Point(71, 230);
             this.listDataTimes.Name = "listDataTimes";
             this.listDataTimes.Size = new System.Drawing.Size(267, 112);
-            this.listDataTimes.TabIndex = 14;
+            this.listDataTimes.TabIndex = 10;
             // 
-            // dateTimePicker1
+            // datePicker
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(72, 203);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(267, 21);
-            this.dateTimePicker1.TabIndex = 15;
+            this.datePicker.Location = new System.Drawing.Point(72, 203);
+            this.datePicker.Name = "datePicker";
+            this.datePicker.Size = new System.Drawing.Size(267, 21);
+            this.datePicker.TabIndex = 8;
             // 
             // listParseView
             // 
@@ -158,39 +160,51 @@
             this.listParseView.MultiSelect = false;
             this.listParseView.Name = "listParseView";
             this.listParseView.Size = new System.Drawing.Size(416, 114);
-            this.listParseView.TabIndex = 16;
+            this.listParseView.TabIndex = 11;
             this.listParseView.UseCompatibleStateImageBehavior = false;
             this.listParseView.View = System.Windows.Forms.View.Details;
             // 
             // btnRegister
             // 
-            this.btnRegister.Location = new System.Drawing.Point(14, 468);
+            this.btnRegister.Location = new System.Drawing.Point(14, 487);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(335, 23);
-            this.btnRegister.TabIndex = 17;
+            this.btnRegister.TabIndex = 12;
             this.btnRegister.Text = "등록";
             this.btnRegister.UseVisualStyleBackColor = true;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(355, 468);
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnClose.Location = new System.Drawing.Point(355, 487);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 18;
+            this.btnClose.TabIndex = 13;
             this.btnClose.Text = "닫기";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(15, 465);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(131, 12);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "범례: @:키항목, *:일치";
             // 
             // frmLoadData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(447, 501);
+            this.CancelButton = this.btnClose;
+            this.ClientSize = new System.Drawing.Size(447, 520);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.listParseView);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.datePicker);
             this.Controls.Add(this.listDataTimes);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.listDataTypes);
@@ -223,9 +237,10 @@
         private System.Windows.Forms.ListBox listDataTypes;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ListBox listDataTimes;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker datePicker;
         private System.Windows.Forms.ListView listParseView;
         private System.Windows.Forms.Button btnRegister;
         private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Label label6;
     }
 }

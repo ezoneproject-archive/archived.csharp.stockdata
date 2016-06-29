@@ -193,5 +193,12 @@ namespace stockdata
             Configure.windowW = this.ClientSize.Width;
             Configure.windowH = this.ClientSize.Height;
         }
+
+        private void settingsOpen_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmSettings frmL = new frmSettings();
+            frmL.MdiParent = this;
+            frmL.Show();
+        }
     }
 }

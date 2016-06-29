@@ -45,11 +45,14 @@ namespace stockdata.utils
         public Dictionary<string, string> QueryString { get; set; } = new Dictionary<string, string>();
 
         /// <summary>
-        /// 요청 데이터 포맷
+        /// 요청을 보내면서 사용할 데이터 포맷 (요청 Content-type)
         /// </summary>
         public string RequestDataFormat { get; set; } = DATA_FORMAT_FORM;
 
-        // POST, PUT 용 요청데이터 추가... ------------------------------
+        /// <summary>
+        /// 요청 내용 배열 (POST, PUT 요청 데이터)
+        /// </summary>
+        public byte[] RequestContent { get; set; } = new byte[0];
 
         /// <summary>
         /// 응답 데이터 포맷 Recommand (Accept 헤더)
@@ -134,6 +137,21 @@ namespace stockdata.utils
             try
             {
                 HttpWebRequest request = createWebRequest();
+                // POST or PUT
+                if (Method.Equals(REST_METHOD_CREATE) || Method.Equals(REST_METHOD_UPDATE))
+                {
+                    request.ContentType = RequestDataFormat;   //; charset=UTF-8
+                    request.ContentLength = RequestContent.Length;
+
+                    if (RequestContent.Length > 0)
+                    {
+                        using (Stream reqStream = request.GetRequestStream())
+                        {
+                            reqStream.Write(RequestContent, 0, RequestContent.Length);
+                        }
+                    }
+                }
+
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                 {
                     ResponseCode = (int)WebExceptionStatus.Success;
@@ -287,18 +305,6 @@ namespace stockdata.utils
                 request.Headers.Add("X-Authorization", authorize);
             }
 
-            // POST or PUT
-            if (Method.Equals(REST_METHOD_CREATE) || Method.Equals(REST_METHOD_UPDATE))
-            {
-                request.ContentType = RequestDataFormat;   //; charset=UTF-8
-                //request.ContentLength
-
-                //request.GetRequestStream()
-                //Stream newStream = myHttpWebRequest.GetRequestStream ();
-                //newStream.Write(byte1, 0, byte1.Length); newStream.close();
-
-            }
-
             return request;
         }
 
@@ -380,8 +386,9 @@ namespace stockdata.utils
             //Console.WriteLine("Charset: " + response.CharacterSet);
 
             using (MemoryStream memStream = new MemoryStream())
+            using (Stream respStream = response.GetResponseStream())
             {
-                response.GetResponseStream().CopyTo(memStream);
+                respStream.CopyTo(memStream);
                 ResponseContent = memStream.ToArray();
             }
         }

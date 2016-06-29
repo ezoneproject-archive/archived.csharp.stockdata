@@ -87,20 +87,18 @@ namespace stockdata.utils
         /// <summary>
         /// http 프로토콜에서 암호화여부, 1 or 0
         /// </summary>
-        public static string httpEncrypt
+        public static bool httpEncrypt
         {
             get
             {
                 string val = ConfigureImpl.get("httpEncrypt");
                 if (val == null || val.Length == 0)
-                    return "0";
-                return val;
+                    return false;
+                return (val.Equals("1") ? true : false);
             }
             set
             {
-                string val = "0";
-                if (value != null && value.Equals("1"))
-                    val = "1";
+                string val = (value ? "1" : "0");
                 ConfigureImpl.set("httpEncrypt", val);
             }
         }

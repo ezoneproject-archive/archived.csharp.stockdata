@@ -1,6 +1,10 @@
-﻿using stockdata.jsonobject;
+﻿using Newtonsoft.Json;
+using stockdata.jsonobject;
+using stockdata.utils;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace stockdata
@@ -9,6 +13,7 @@ namespace stockdata
     {
         private bool isRegistered = false;
         private bool isParsed = false;
+        private SamFileData samFileParser = new SamFileData();
 
         /// <summary>
         /// Default form load
@@ -18,9 +23,16 @@ namespace stockdata
             InitializeComponent();
 
             // check null...
-            this.listDataTypes.DataSource = new BindingSource(DataMasterCache.DataMaster.masterList, null);
-            this.listDataTypes.DisplayMember = "name";
-            this.listDataTypes.ValueMember = "id";
+            if (DataMasterCache.DataMaster.masterList != null)
+            {
+                this.listDataTypes.BeginUpdate();
+                this.listDataTypes.DataSource = new BindingSource(DataMasterCache.DataMaster.masterList, null);
+                this.listDataTypes.DisplayMember = "name";
+                this.listDataTypes.ValueMember = "id";
+                this.listDataTypes.EndUpdate();
+
+                this.listDataTypes.SelectedIndex = -1;
+            }
         }
 
         /// <summary>
@@ -30,7 +42,9 @@ namespace stockdata
         public frmLoadData(string fileName) : this()
         {
             txtFilePathName.Text = fileName;
+
             txtFileName.Text = Path.GetFileName(txtFilePathName.Text);
+            samFileParser.FileName = txtFilePathName.Text;
         }
 
         /// <summary>
@@ -48,7 +62,9 @@ namespace stockdata
             if (openFile.ShowDialog() == DialogResult.OK)
             {
                 txtFilePathName.Text = openFile.FileName;
+
                 txtFileName.Text = Path.GetFileName(txtFilePathName.Text);
+                samFileParser.FileName = txtFilePathName.Text;
 
                 listDataTypes_SelectedIndexChanged(sender, e);
             }
@@ -58,49 +74,90 @@ namespace stockdata
         {
             MasterList selectedMaster = (MasterList)this.listDataTypes.SelectedItem;
 
-            this.listDataTimes.DataSource = new BindingSource(selectedMaster.timeList, null);
-            this.listDataTimes.DisplayMember = "name";
-            this.listDataTimes.ValueMember = "id";
-
-            // 파일 분석기 가동
-            if (txtFilePathName.Text.Length > 0)
+            if (selectedMaster != null && selectedMaster.timeList != null)
             {
-                //
+                this.listDataTimes.DataSource = new BindingSource(selectedMaster.timeList, null);
+                this.listDataTimes.DisplayMember = "name";
+                this.listDataTimes.ValueMember = "id";
+
+                this.listDataTimes.SelectedIndex = -1;
             }
 
 
-            //this.listParseView.DataBindings = new BindingSource(selectedMaster.dataHeader, null);
-
-            // 리스트뷰 뷰 타입
-            listParseView.View = View.Details;
-
-            // 데이터를 갱신하기 전에 UI쓰레드를 멈춘다.
-            listParseView.BeginUpdate();
-
-            listParseView.Columns.Clear();
-            foreach (DataHeader header in selectedMaster.dataHeader)
+            // 파일 분석이 완료되었으면 파일을 리스트뷰에 표시
+            if (samFileParser.IsSuccess)
             {
-                listParseView.Columns.Add(header.name, 100, HorizontalAlignment.Left);
+                // 리스트뷰 뷰 타입
+                this.listParseView.View = View.Details;
+                // 데이터를 갱신하기 전에 UI쓰레드를 멈춘다.
+                this.listParseView.BeginUpdate();
+
+                // 컬럼헤더 Clear
+                this.listParseView.Columns.Clear();
+
+                // 컬럼헤더 생성
+                for (int i = 0; i < samFileParser.HeaderNames.Length; i++)
+                {
+                    ColumnHeader hdrItem = new ColumnHeader();
+                    hdrItem.Text = samFileParser.HeaderNames[i];
+
+                    // 종목코드 정보는 PK 항목
+                    if (samFileParser.HeaderNames[i].Equals("종목명") ||
+                        samFileParser.HeaderNames[i].Equals("종목코드") ||
+                        samFileParser.HeaderNames[i].Equals("소속업종"))
+                    {
+                        hdrItem.Text = "@" + hdrItem.Text;
+                    }
+
+                    if (selectedMaster != null && selectedMaster.dataHeader != null)
+                    {
+                        foreach (DataHeader header in selectedMaster.dataHeader)
+                        {
+                            // 항목명이 서버에 저장된 구조와 일치하면 필드명 앞에 * 추가
+                            if (samFileParser.HeaderNames[i].Equals(header.name))
+                            {
+                                hdrItem.Text = "*" + hdrItem.Text;
+                                hdrItem.Name = "" + header.id;
+                                break;
+                            }
+                        }
+                    }
+                    hdrItem.Width = hdrItem.Text.Length * 15;
+
+                    this.listParseView.Columns.Add(hdrItem);
+                }
+
+                // 리스트 데이터 생성
+                foreach (List<SamFileDataStruct> data in samFileParser.DataItems)
+                {
+                    ListViewItem item = null;
+                    foreach (SamFileDataStruct sam in data)
+                    {
+                        if (item == null)
+                            item = new ListViewItem(sam.FieldValue);
+                        else
+                            item.SubItems.Add(sam.FieldValue);
+                    }
+
+                    this.listParseView.Items.Add(item);
+                }
+
+                // UI 쓰레드 재개
+                this.listParseView.EndUpdate();
+
+                isParsed = true;
             }
-
-            /*
-                        // 각 파일별로 ListViewItem객체를 하나씩 만듦
-                        // 파일명, 사이즈, 날짜 정보를 추가
-                        ListViewItem lvi = new ListViewItem("" + header.id);
-                        lvi.SubItems.Add(header.name);
-
-                        // ListViewItem객체를 Items 속성에 추가
-                        listParseView.Items.Add(lvi);
-            */
-
-            // UI 쓰레드 재개
-            listParseView.EndUpdate();
-
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnNewDesign_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("예정입니다...", "Error");
+            return;
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
@@ -110,15 +167,73 @@ namespace stockdata
                 MessageBox.Show("이미 등록했습니다.", "Error");
                 return;
             }
+
             if (!isParsed)
             {
                 MessageBox.Show("미분석 파일입니다.", "Error");
                 return;
             }
 
-            // 등록 처리
+            if (this.listDataTypes.SelectedIndex < 0)
+            {
+                MessageBox.Show("자료 종류를 선택하지 않았습니다.", "Error");
+                return;
+            }
+
+            if (this.listDataTimes.SelectedIndex < 0)
+            {
+                MessageBox.Show("시간을 선택하지 않았습니다.", "Error");
+                return;
+            }
+
+            // 자료 종류
+            MasterList selectedMaster = (MasterList)this.listDataTypes.SelectedItem;
+            string dataTypeName = selectedMaster.name;
+            int dataTypeId = selectedMaster.id;
+
+            // 자료 시간
+            string dataTime = (string)this.listDataTimes.SelectedValue;
+
+            // 자료일자
+            DateTime d = this.datePicker.Value;
+            string dataDate = d.ToString("yyyyMMdd");
+
+            Console.WriteLine("자료종류: " + dataTypeId + ":" + dataTypeName);
+            Console.WriteLine("자료일자: " + dataDate);
+            Console.WriteLine("자료시간: " + dataTime);
+
+            // 자료 등록 처리
+            // 등록URL: data/<자료종류>/<자료일자>/<자료시간>
+            string resource_value = dataTypeId + "/" + dataDate + "/" + dataTime;
+            HttpRestClient client = new HttpRestClient(HttpRestClient.REST_METHOD_CREATE, "data/" + resource_value);
+
+            client.RequestDataFormat = HttpRestClient.DATA_FORMAT_JSON;
+            string jsonStr = JsonConvert.SerializeObject(samFileParser.DataItems);
+            client.RequestContent = Encoding.UTF8.GetBytes(jsonStr);
+
+            // -------------------------------------------
+            //Console.WriteLine(jsonStr);
+            File.WriteAllText("json.txt", jsonStr);
+
+            if (!client.doWork())
+            {
+                MessageBox.Show(client.ResponseMessage, "Request error!");
+                Console.WriteLine(client.getString());
+
+                return;
+            }
+
+            dynamic json = client.getJsonObject();
+            if (json == null)
+            {
+                MessageBox.Show("전송 오류가 발생했습니다. (Can't convert json)", "Format error!");
+                return;
+            }
+            Console.WriteLine("statusCode: " + json["_metadata"]["statusCode"]);
 
             isRegistered = true;
         }
+
     }
 }
+
