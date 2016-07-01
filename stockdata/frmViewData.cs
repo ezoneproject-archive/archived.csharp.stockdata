@@ -86,7 +86,7 @@ namespace stockdata
             string resource_value = dataTypeId + "/" + dataDate + "/" + dataTime;
             HttpRestClient client = new HttpRestClient("data/" + resource_value);
 
-            if (!client.doWork())
+            if (!client.doWorkDialog())
             {
                 MessageBox.Show(client.ResponseMessage, "Request error!");
                 Console.WriteLine(client.getString());
@@ -153,14 +153,12 @@ namespace stockdata
 
                     listView.Items.Add(listItem);
                 }
-                // rows 에서 stockCode 찾음
-                //item.stockCode;
-                //listView.Columns.
             }
 
             // UI 쓰레드 재개
             listView.EndUpdate();
 
+            txtDataInfo.Text = dataTypeName + " / " + dataDate + " / " + dataTime;
             isValidView = true;
         }
 
@@ -211,13 +209,14 @@ namespace stockdata
             string resource_value = dataTypeId + "/" + dataDate + "/" + dataTime;
             HttpRestClient client = new HttpRestClient(HttpRestClient.REST_METHOD_DELETE, "data/" + resource_value);
 
-            if (!client.doWork())
+            if (!client.doWorkDialog())
             {
                 MessageBox.Show(client.ResponseMessage, "Request error!");
                 Console.WriteLine(client.getString());
-
                 return;
             }
+
+            MessageBox.Show("삭제요청이 처리되었습니다.", "완료");
         }
 
     }

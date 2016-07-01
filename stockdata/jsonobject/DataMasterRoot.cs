@@ -2,9 +2,6 @@
 using stockdata.utils;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace stockdata.jsonobject
 {
@@ -17,11 +14,11 @@ namespace stockdata.jsonobject
             {
                 if (_dataMaster == null)
                 {
+                    // 값이 없을 경우 서버에서 받아와서 초기화
+                    // 한 번 값을 가져오면 프로그램 재시작까지 캐시한다.
                     HttpRestClient client = new HttpRestClient("master");
-                    if (!client.doWork())
-                    {
+                    if (!client.doWorkDialog())
                         return null;
-                    }
 
                     try
                     {

@@ -25,6 +25,8 @@ namespace stockdata.utils
 
         public const string API_AUTH_VERSION = "API1-HMAC-SHA256";
 
+        private HttpWebRequest request = null;
+
         // ---------------------------------------------------------------- //
         // 요청정보
         // ---------------------------------------------------------------- //
@@ -129,14 +131,27 @@ namespace stockdata.utils
         }
 
         /// <summary>
+        /// 통신 다이얼로그를 생성하고 서버와 통신 처리한다.
+        /// </summary>
+        /// <returns></returns>
+        public bool doWorkDialog()
+        {
+            new frmTransWaiting(this).ShowDialog();
+            return isSuccess();
+        }
+
+        /// <summary>
         /// 서버와 통신
         /// </summary>
         public bool doWork()
         {
+            if (isWorked)
+                return isSuccess();
+
             isWorked = true;
             try
             {
-                HttpWebRequest request = createWebRequest();
+                request = createWebRequest();
                 // POST or PUT
                 if (Method.Equals(REST_METHOD_CREATE) || Method.Equals(REST_METHOD_UPDATE))
                 {
@@ -212,6 +227,17 @@ namespace stockdata.utils
             }
 
             return isSuccess();
+        }
+
+        /// <summary>
+        /// 요청처리 중지
+        /// </summary>
+        public void Abort()
+        {
+            if (request != null)
+            {
+                request.Abort();
+            }
         }
 
         /// <summary>

@@ -38,6 +38,7 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.listView = new System.Windows.Forms.ListView();
+            this.txtDataInfo = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // datePicker
@@ -96,7 +97,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(344, 266);
+            this.btnSearch.Location = new System.Drawing.Point(344, 236);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 6;
@@ -106,7 +107,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(425, 266);
+            this.btnDelete.Location = new System.Drawing.Point(425, 236);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 8;
@@ -116,7 +117,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(506, 266);
+            this.btnClose.Location = new System.Drawing.Point(506, 236);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 9;
@@ -137,11 +138,21 @@
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
             // 
+            // txtDataInfo
+            // 
+            this.txtDataInfo.Location = new System.Drawing.Point(344, 268);
+            this.txtDataInfo.Name = "txtDataInfo";
+            this.txtDataInfo.ReadOnly = true;
+            this.txtDataInfo.Size = new System.Drawing.Size(237, 21);
+            this.txtDataInfo.TabIndex = 17;
+            this.txtDataInfo.TabStop = false;
+            // 
             // frmViewData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(597, 579);
+            this.Controls.Add(this.txtDataInfo);
             this.Controls.Add(this.listView);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnDelete);
@@ -171,5 +182,6 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.ListView listView;
+        private System.Windows.Forms.TextBox txtDataInfo;
     }
 }

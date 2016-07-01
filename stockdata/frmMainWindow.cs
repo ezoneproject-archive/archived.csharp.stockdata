@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using stockdata.utils;
+﻿using stockdata.utils;
 using System;
 using System.IO;
 using System.Security.Cryptography;
@@ -25,17 +24,6 @@ namespace stockdata
 
             if (Configure.windowW >= 0 && Configure.windowH >= 0)
                 this.ClientSize = new System.Drawing.Size(Configure.windowW, Configure.windowH);
-
-            //Configure.testInit();
-            /*
-            HttpRestClient client = new HttpRestClient("data");
-            if (!client.doWork())
-            {
-                MessageBox.Show(client.ResponseMessage, "Request error!");
-                Console.WriteLine(client.getString());
-            }
-            */
-
         }
 
         /// <summary>
@@ -112,18 +100,16 @@ namespace stockdata
         private void checkNewVersion_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HttpRestClient client = new HttpRestClient("clientversion");
-            if (!client.doWork())
+            if (!client.doWorkDialog())
             {
                 MessageBox.Show(client.ResponseMessage, "Request error!");
-                Console.WriteLine(client.getString());
-
                 return;
             }
 
             dynamic json = client.getJsonObject();
             if (json == null)
             {
-                MessageBox.Show("전송 오류가 발생했습니다. (Can't convert json)", "Format error!");
+                MessageBox.Show("전송 오류가 발생했습니다. (JSON 포맷오류)", "Format error!");
                 return;
             }
             Console.WriteLine("statusCode: " + json["_metadata"]["statusCode"]);
@@ -144,18 +130,18 @@ namespace stockdata
                 MessageBox.Show("새 버전이 있습니다. [" + future.ToString() + "]", "버전 확인");
 
                 // 새 버전 다운로드
-                HttpRestClient client2 = new HttpRestClient();
-                client2.RequestUri = (string)json["clientsetup"];
-                if (!client2.doWork())
+                client = new HttpRestClient();
+                client.RequestUri = (string)json["clientsetup"];
+                if (!client.doWorkDialog())
                 {
-                    MessageBox.Show("다운로드 오류: " + client2.ResponseMessage, "Request error!");
+                    MessageBox.Show("다운로드 오류: " + client.ResponseMessage, "Request error!");
                     return;
                 }
 
                 string md5value = "";
                 using (MD5 md5sum = MD5.Create())
                 {
-                    byte[] hashValue = md5sum.ComputeHash(client2.ResponseContent);
+                    byte[] hashValue = md5sum.ComputeHash(client.ResponseContent);
                     for (int i = 0; i < hashValue.Length; i++)
                     {
                         md5value += hashValue[i].ToString("x2");
@@ -163,7 +149,7 @@ namespace stockdata
                 }
                 if (!md5value.Equals((string)json["clientmd5"]))
                 {
-                    MessageBox.Show("다운로드 오류입니다. (확인값 불일치)", "버전 확인");
+                    MessageBox.Show("다운로드 파일 오류입니다. (md5 불일치)", "버전 확인");
                     return;
                 }
 
@@ -171,7 +157,7 @@ namespace stockdata
                 string localFileName = AppDomain.CurrentDomain.BaseDirectory + System.IO.Path.DirectorySeparatorChar + "Setup.exe";
                 using (FileStream fs = File.Create(localFileName))
                 {
-                    fs.Write(client2.ResponseContent, 0, client2.ResponseContent.Length);
+                    fs.Write(client.ResponseContent, 0, client.ResponseContent.Length);
                 }
 
                 // 저장한 파일을 실행

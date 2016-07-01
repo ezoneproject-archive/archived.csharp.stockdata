@@ -2,6 +2,7 @@
 using stockdata.jsonobject;
 using stockdata.utils;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -83,6 +84,10 @@ namespace stockdata
                 this.listDataTimes.SelectedIndex = -1;
             }
 
+            // 항목 Clear
+            isRegistered = false;
+            this.listParseView.Columns.Clear();
+            this.listParseView.Items.Clear();
 
             // 파일 분석이 완료되었으면 파일을 리스트뷰에 표시
             if (samFileParser.IsSuccess)
@@ -91,9 +96,6 @@ namespace stockdata
                 this.listParseView.View = View.Details;
                 // 데이터를 갱신하기 전에 UI쓰레드를 멈춘다.
                 this.listParseView.BeginUpdate();
-
-                // 컬럼헤더 Clear
-                this.listParseView.Columns.Clear();
 
                 // 컬럼헤더 생성
                 for (int i = 0; i < samFileParser.HeaderNames.Length; i++)
@@ -215,7 +217,8 @@ namespace stockdata
             //Console.WriteLine(jsonStr);
             File.WriteAllText("json.txt", jsonStr);
 
-            if (!client.doWork())
+
+            if (!client.doWorkDialog())
             {
                 MessageBox.Show(client.ResponseMessage, "Request error!");
                 Console.WriteLine(client.getString());
@@ -230,6 +233,18 @@ namespace stockdata
                 return;
             }
             Console.WriteLine("statusCode: " + json["_metadata"]["statusCode"]);
+
+            if (json["FieldNotFound"] != null && ((string)json["FieldNotFound"]).Length > 0)
+            {
+                MessageBox.Show("다음 항목은 미등록 항목으로 저장하지 않았습니다.\n" + ((string)json["FieldNotFound"]), "주의");
+            }
+
+            //json["ErrorData"];
+
+            if ((int)json["Rows"] == 0)
+                MessageBox.Show("등록 건수가 없습니다. 중복여부를 확인하세요.", "등록오류");
+            else
+                MessageBox.Show(((string)json["Rows"]) + "건 등록이 완료되었습니다.", "등록완료");
 
             isRegistered = true;
         }

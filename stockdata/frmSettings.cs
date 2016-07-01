@@ -1,12 +1,5 @@
 ﻿using stockdata.utils;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace stockdata
@@ -38,7 +31,7 @@ namespace stockdata
             Configure.apiKey = txtApiKey.Text;
             Configure.apiSecret = txtApiSecret.Text;
 
-            MessageBox.Show("저장했습니다.", "Settings");
+            MessageBox.Show("설정을 저장했습니다.", "Settings");
             this.Close();
         }
     }

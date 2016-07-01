@@ -53,6 +53,12 @@
     <Compile Include="frmSettings.Designer.cs">
       <DependentUpon>frmSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmTransWaiting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTransWaiting.Designer.cs">
+      <DependentUpon>frmTransWaiting.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmViewData.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +94,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSettings.resx">
       <DependentUpon>frmSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTransWaiting.resx">
+      <DependentUpon>frmTransWaiting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmViewData.resx">
       <DependentUpon>frmViewData.cs</DependentUpon>
