@@ -36,6 +36,9 @@
             this.dataManage_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registerFile_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewServerData_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.view_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.invfgnRpt_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stDiffRpt_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,7 +46,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.dataManage_ToolStripMenuItem});
+            this.dataManage_ToolStripMenuItem,
+            this.view_ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -63,21 +67,21 @@
             // settingsOpen_ToolStripMenuItem
             // 
             this.settingsOpen_ToolStripMenuItem.Name = "settingsOpen_ToolStripMenuItem";
-            this.settingsOpen_ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
-            this.settingsOpen_ToolStripMenuItem.Text = "설정 ...";
+            this.settingsOpen_ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.settingsOpen_ToolStripMenuItem.Text = "설정";
             this.settingsOpen_ToolStripMenuItem.Click += new System.EventHandler(this.settingsOpen_ToolStripMenuItem_Click);
             // 
             // checkNewVersion_ToolStripMenuItem
             // 
             this.checkNewVersion_ToolStripMenuItem.Name = "checkNewVersion_ToolStripMenuItem";
-            this.checkNewVersion_ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.checkNewVersion_ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.checkNewVersion_ToolStripMenuItem.Text = "새 버전 체크";
             this.checkNewVersion_ToolStripMenuItem.Click += new System.EventHandler(this.checkNewVersion_ToolStripMenuItem_Click);
             // 
             // exit_ToolStripMenuItem
             // 
             this.exit_ToolStripMenuItem.Name = "exit_ToolStripMenuItem";
-            this.exit_ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.exit_ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exit_ToolStripMenuItem.Text = "종료";
             this.exit_ToolStripMenuItem.Click += new System.EventHandler(this.exit_ToolStripMenuItem_Click);
             // 
@@ -103,6 +107,27 @@
             this.viewServerData_ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.viewServerData_ToolStripMenuItem.Text = "자료조회/삭제";
             this.viewServerData_ToolStripMenuItem.Click += new System.EventHandler(this.viewServerData_ToolStripMenuItem_Click);
+            // 
+            // view_ToolStripMenuItem
+            // 
+            this.view_ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.invfgnRpt_ToolStripMenuItem,
+            this.stDiffRpt_ToolStripMenuItem});
+            this.view_ToolStripMenuItem.Name = "view_ToolStripMenuItem";
+            this.view_ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.view_ToolStripMenuItem.Text = "조회";
+            // 
+            // invfgnRpt_ToolStripMenuItem
+            // 
+            this.invfgnRpt_ToolStripMenuItem.Name = "invfgnRpt_ToolStripMenuItem";
+            this.invfgnRpt_ToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.invfgnRpt_ToolStripMenuItem.Text = "외인기관 집계표";
+            // 
+            // stDiffRpt_ToolStripMenuItem
+            // 
+            this.stDiffRpt_ToolStripMenuItem.Name = "stDiffRpt_ToolStripMenuItem";
+            this.stDiffRpt_ToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.stDiffRpt_ToolStripMenuItem.Text = "종목변동현황";
             // 
             // frmMainWindow
             // 
@@ -135,6 +160,9 @@
         private System.Windows.Forms.ToolStripMenuItem settingsOpen_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewServerData_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem registerFile_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem view_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem invfgnRpt_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stDiffRpt_ToolStripMenuItem;
     }
 }
 

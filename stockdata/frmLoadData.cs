@@ -215,7 +215,7 @@ namespace stockdata
 
             // -------------------------------------------
             //Console.WriteLine(jsonStr);
-            File.WriteAllText("json.txt", jsonStr);
+            //File.WriteAllText("json.txt", jsonStr);
 
 
             if (!client.doWorkDialog())
