@@ -55,6 +55,7 @@
             this.listDataTimes.Name = "listDataTimes";
             this.listDataTimes.Size = new System.Drawing.Size(267, 112);
             this.listDataTimes.TabIndex = 16;
+            this.listDataTimes.SelectedIndexChanged += new System.EventHandler(this.listDataTimes_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -125,6 +126,10 @@
             // 
             // listView
             // 
+            this.listView.AllowColumnReorder = true;
+            this.listView.FullRowSelect = true;
+            this.listView.GridLines = true;
+            this.listView.HideSelection = false;
             this.listView.Location = new System.Drawing.Point(14, 295);
             this.listView.Name = "listView";
             this.listView.Size = new System.Drawing.Size(567, 272);
@@ -148,7 +153,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Name = "frmViewData";
-            this.Text = "자료조회";
+            this.Text = "자료관리";
             this.ResumeLayout(false);
             this.PerformLayout();
 

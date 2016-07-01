@@ -8,6 +8,8 @@ namespace stockdata
 {
     public partial class frmViewData : Form
     {
+        bool isValidView = false;
+
         public frmViewData()
         {
             InitializeComponent();
@@ -26,6 +28,7 @@ namespace stockdata
 
         private void listDataTypes_SelectedIndexChanged(object sender, System.EventArgs e)
         {
+            isValidView = false;
             MasterList selectedMaster = (MasterList)this.listDataTypes.SelectedItem;
 
             if (selectedMaster != null && selectedMaster.timeList != null)
@@ -36,6 +39,11 @@ namespace stockdata
 
                 this.listDataTimes.SelectedIndex = -1;
             }
+        }
+
+        private void listDataTimes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            isValidView = false;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -113,6 +121,38 @@ namespace stockdata
             // 종목코드 찾음, 없을경우 새 row에 등록
             foreach (DataList item in data.dataList)
             {
+
+                if (listView.Items.ContainsKey(item.stockCode))
+                {
+                    // 자료 있음 (기존자료 확인)
+                    int idx = listView.Items.IndexOfKey(item.stockCode);
+                    for (int i=0; i< selectedMaster.dataHeader.Count; i++)
+                    {
+                        if (selectedMaster.dataHeader[i].id == item.itemKey)
+                        {
+                            // 0: 내부 key
+                            // 1: 종목명
+                            listView.Items[idx].SubItems[i + 2].Text = item.data;
+                        }
+                    }
+                }
+                else
+                {
+                    // 자료 없음 (새 자료 입력)
+                    ListViewItem listItem = new ListViewItem(item.stockCode);
+                    listItem.Name = item.stockCode;
+                    listItem.SubItems.Add(item.stockName);
+
+                    foreach (DataHeader header in selectedMaster.dataHeader)
+                    {
+                        if (header.id == item.itemKey)
+                            listItem.SubItems.Add(item.data);
+                        else
+                            listItem.SubItems.Add("");
+                    }
+
+                    listView.Items.Add(listItem);
+                }
                 // rows 에서 stockCode 찾음
                 //item.stockCode;
                 //listView.Columns.
@@ -120,10 +160,18 @@ namespace stockdata
 
             // UI 쓰레드 재개
             listView.EndUpdate();
+
+            isValidView = true;
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            if (!isValidView)
+            {
+                MessageBox.Show("조회 후 처리해주세요.", "Error");
+                return;
+            }
+
             if (this.listDataTypes.SelectedIndex < 0)
             {
                 MessageBox.Show("자료 종류를 선택하지 않았습니다.", "Error");
@@ -171,5 +219,6 @@ namespace stockdata
                 return;
             }
         }
+
     }
 }

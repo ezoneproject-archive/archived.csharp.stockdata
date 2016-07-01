@@ -97,7 +97,7 @@ namespace stockdata
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void loadFile_ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void registerFile_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmLoadData frmL = new frmLoadData();
             frmL.MdiParent = this;
@@ -105,7 +105,7 @@ namespace stockdata
         }
 
         /// <summary>
-        /// 새 버전이 있는지 체크
+        /// 새 버전 체크
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -209,5 +209,6 @@ namespace stockdata
             frmL.MdiParent = this;
             frmL.Show();
         }
+
     }
 }
