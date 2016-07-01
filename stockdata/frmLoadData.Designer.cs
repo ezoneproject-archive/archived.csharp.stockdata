@@ -112,7 +112,7 @@
             this.btnNewDesign.Location = new System.Drawing.Point(345, 174);
             this.btnNewDesign.Name = "btnNewDesign";
             this.btnNewDesign.Size = new System.Drawing.Size(85, 23);
-            this.btnNewDesign.TabIndex = 14;
+            this.btnNewDesign.TabIndex = 15;
             this.btnNewDesign.Text = "신규 ...";
             this.btnNewDesign.UseVisualStyleBackColor = true;
             this.btnNewDesign.Click += new System.EventHandler(this.btnNewDesign_Click);

@@ -53,6 +53,12 @@
     <Compile Include="frmSettings.Designer.cs">
       <DependentUpon>frmSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmViewData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmViewData.Designer.cs">
+      <DependentUpon>frmViewData.cs</DependentUpon>
+    </Compile>
     <Compile Include="jsonobject\DataMasterRoot.cs" />
     <Compile Include="jsonobject\DataRoot.cs" />
     <Compile Include="jsonobject\Metadata.cs" />
@@ -82,6 +88,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSettings.resx">
       <DependentUpon>frmSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmViewData.resx">
+      <DependentUpon>frmViewData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

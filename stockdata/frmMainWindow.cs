@@ -27,12 +27,14 @@ namespace stockdata
                 this.ClientSize = new System.Drawing.Size(Configure.windowW, Configure.windowH);
 
             //Configure.testInit();
+            /*
             HttpRestClient client = new HttpRestClient("data");
             if (!client.doWork())
             {
                 MessageBox.Show(client.ResponseMessage, "Request error!");
                 Console.WriteLine(client.getString());
             }
+            */
 
         }
 
@@ -197,6 +199,13 @@ namespace stockdata
         private void settingsOpen_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmSettings frmL = new frmSettings();
+            frmL.MdiParent = this;
+            frmL.Show();
+        }
+
+        private void viewServerData_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmViewData frmL = new frmViewData();
             frmL.MdiParent = this;
             frmL.Show();
         }
