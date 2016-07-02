@@ -25,6 +25,9 @@ namespace stockdata
 
             if (Configure.windowW >= 0 && Configure.windowH >= 0)
                 this.ClientSize = new System.Drawing.Size(Configure.windowW, Configure.windowH);
+
+            // 상태바 업데이트
+            toolStripStatusLabel1.Text = "접속서버: " + Configure.server + "/" +Configure.apiVersion;
         }
 
         /// <summary>
