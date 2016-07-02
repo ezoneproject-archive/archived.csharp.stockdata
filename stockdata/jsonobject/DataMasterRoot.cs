@@ -38,6 +38,23 @@ namespace stockdata.jsonobject
                 _dataMaster = value;
             }
         }
+
+        /// <summary>
+        /// 데이터 이름으로 마스터 get
+        /// </summary>
+        /// <param name="dataMasterName"></param>
+        /// <returns>null</returns>
+        public static MasterList getDataMasterByName(string dataMasterName)
+        {
+            if (DataMaster == null)
+                return null;
+            foreach (MasterList item in DataMaster.masterList)
+            {
+                if (item.name.Equals(dataMasterName))
+                    return item;
+            }
+            return null;
+        }
     }
 
     public class DataMasterRoot

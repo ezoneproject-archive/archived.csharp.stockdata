@@ -67,21 +67,21 @@
             // settingsOpen_ToolStripMenuItem
             // 
             this.settingsOpen_ToolStripMenuItem.Name = "settingsOpen_ToolStripMenuItem";
-            this.settingsOpen_ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.settingsOpen_ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.settingsOpen_ToolStripMenuItem.Text = "설정";
             this.settingsOpen_ToolStripMenuItem.Click += new System.EventHandler(this.settingsOpen_ToolStripMenuItem_Click);
             // 
             // checkNewVersion_ToolStripMenuItem
             // 
             this.checkNewVersion_ToolStripMenuItem.Name = "checkNewVersion_ToolStripMenuItem";
-            this.checkNewVersion_ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.checkNewVersion_ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.checkNewVersion_ToolStripMenuItem.Text = "새 버전 체크";
             this.checkNewVersion_ToolStripMenuItem.Click += new System.EventHandler(this.checkNewVersion_ToolStripMenuItem_Click);
             // 
             // exit_ToolStripMenuItem
             // 
             this.exit_ToolStripMenuItem.Name = "exit_ToolStripMenuItem";
-            this.exit_ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exit_ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.exit_ToolStripMenuItem.Text = "종료";
             this.exit_ToolStripMenuItem.Click += new System.EventHandler(this.exit_ToolStripMenuItem_Click);
             // 
@@ -97,14 +97,14 @@
             // registerFile_ToolStripMenuItem
             // 
             this.registerFile_ToolStripMenuItem.Name = "registerFile_ToolStripMenuItem";
-            this.registerFile_ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.registerFile_ToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.registerFile_ToolStripMenuItem.Text = "자료등록";
             this.registerFile_ToolStripMenuItem.Click += new System.EventHandler(this.registerFile_ToolStripMenuItem_Click);
             // 
             // viewServerData_ToolStripMenuItem
             // 
             this.viewServerData_ToolStripMenuItem.Name = "viewServerData_ToolStripMenuItem";
-            this.viewServerData_ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.viewServerData_ToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.viewServerData_ToolStripMenuItem.Text = "자료조회/삭제";
             this.viewServerData_ToolStripMenuItem.Click += new System.EventHandler(this.viewServerData_ToolStripMenuItem_Click);
             // 
@@ -122,6 +122,7 @@
             this.invfgnRpt_ToolStripMenuItem.Name = "invfgnRpt_ToolStripMenuItem";
             this.invfgnRpt_ToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.invfgnRpt_ToolStripMenuItem.Text = "외인기관 집계표";
+            this.invfgnRpt_ToolStripMenuItem.Click += new System.EventHandler(this.invfgnRpt_ToolStripMenuItem_Click);
             // 
             // stDiffRpt_ToolStripMenuItem
             // 

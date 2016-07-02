@@ -1,4 +1,5 @@
-﻿using stockdata.utils;
+﻿using stockdata.forms;
+using stockdata.utils;
 using System;
 using System.IO;
 using System.Security.Cryptography;
@@ -196,5 +197,11 @@ namespace stockdata
             frmL.Show();
         }
 
+        private void invfgnRpt_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm집계표 frmL = new frm집계표();
+            frmL.MdiParent = this;
+            frmL.Show();
+        }
     }
 }

@@ -158,6 +158,37 @@ namespace stockdata
             // UI 쓰레드 재개
             listView.EndUpdate();
 
+            /*
+             * dataGridView1 버전
+            DataTable workTable = new DataTable("Report");
+            foreach (DataHeader header in master.dataHeader)
+            {
+                workTable.Columns.Add(header.name, typeof(String));
+            }
+
+            foreach (DataList item in data.dataList)
+            {
+                DataRow[] foundRows = workTable.Select("종목코드 = '" + item.stockCode + "'");
+                if (foundRows == null || foundRows.Length == 0)
+                {
+                    DataRow workRow = workTable.NewRow();
+                    workRow["종목코드"] = item.stockCode;
+                    workRow["종목명"] = item.stockName;
+                    workRow[item.itemName] = item.data;
+                    workTable.Rows.Add(workRow);
+                }
+                else
+                {
+                    foundRows[0].BeginEdit();
+                    foundRows[0][item.itemName] = item.data;
+                    foundRows[0].EndEdit();
+                }
+            }
+
+            dataGridView1.DataSource = workTable;
+            dataGridView1.AutoResizeColumns();
+            */
+
             txtDataInfo.Text = dataTypeName + " / " + dataDate + " / " + dataTime;
             isValidView = true;
         }
