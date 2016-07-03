@@ -46,6 +46,8 @@ namespace stockdata.utils
         /// </summary>
         public Dictionary<string, string> QueryString { get; set; } = new Dictionary<string, string>();
 
+        public bool UserEncryptMode { get; set; } = Configure.httpEncrypt;
+
         /// <summary>
         /// 요청을 보내면서 사용할 데이터 포맷 (요청 Content-type)
         /// </summary>
@@ -155,6 +157,13 @@ namespace stockdata.utils
                 // POST or PUT
                 if (Method.Equals(REST_METHOD_CREATE) || Method.Equals(REST_METHOD_UPDATE))
                 {
+                    // 암호화처리
+                    if (RequestContent.Length > 0 && UserEncryptMode)
+                    {
+                        byte[] aesenc = AESUtil.Encrypt(RequestContent);
+                        RequestContent = Encoding.UTF8.GetBytes(Convert.ToBase64String(aesenc));
+                    }
+
                     request.ContentType = RequestDataFormat;   //; charset=UTF-8
                     request.ContentLength = RequestContent.Length;
 
@@ -331,6 +340,16 @@ namespace stockdata.utils
                 request.Headers.Add("X-Authorization", authorize);
             }
 
+            if (UserEncryptMode)
+            {
+                // 암호화헤더 추가
+                byte[] key = AESUtil.createRandomKeys(AESUtil.AES_BITS_256);
+                AESUtil.Key = key;
+                string rsaEncodedKey = "AES/256/CBC," + RSAEncrypt.Encrypt(key);
+                Console.WriteLine("X-Encrypt-Key:" + rsaEncodedKey);
+                request.Headers.Add("X-Encrypt-Key", rsaEncodedKey);
+            }
+
             return request;
         }
 
@@ -416,6 +435,16 @@ namespace stockdata.utils
             {
                 respStream.CopyTo(memStream);
                 ResponseContent = memStream.ToArray();
+            }
+
+            // 복호화처리
+            //X-Encrypted 헤더 찾기
+            string encmode = response.GetResponseHeader("X-Encrypted");
+            if (UserEncryptMode && encmode != null && encmode.Equals("enabled"))
+            {
+                Console.WriteLine("Data encrypted.");
+                byte[] b64dec = Convert.FromBase64String(Encoding.UTF8.GetString(ResponseContent));
+                ResponseContent = AESUtil.Decrypt(b64dec);
             }
         }
     }

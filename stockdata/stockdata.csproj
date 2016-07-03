@@ -122,6 +122,7 @@
     <Compile Include="jsonobject\DataMasterRoot.cs" />
     <Compile Include="jsonobject\DataRoot.cs" />
     <Compile Include="jsonobject\Metadata.cs" />
+    <Compile Include="utils\AESUtil.cs" />
     <Compile Include="utils\Configure.cs" />
     <Compile Include="utils\ConfigureImpl.cs" />
     <Compile Include="frmLoadData.cs">
@@ -136,6 +137,7 @@
     <Compile Include="frmMainWindow.Designer.cs">
       <DependentUpon>frmMainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="utils\RSAEncrypt.cs" />
     <Compile Include="utils\HttpRestClient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
