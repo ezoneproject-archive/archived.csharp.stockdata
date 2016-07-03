@@ -132,6 +132,7 @@
             this.stDiffRpt_ToolStripMenuItem.Name = "stDiffRpt_ToolStripMenuItem";
             this.stDiffRpt_ToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.stDiffRpt_ToolStripMenuItem.Text = "종목변동현황";
+            this.stDiffRpt_ToolStripMenuItem.Click += new System.EventHandler(this.stDiffRpt_ToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 

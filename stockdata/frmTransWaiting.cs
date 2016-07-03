@@ -63,7 +63,10 @@ namespace stockdata
             if (progBar.Value >= progBar.Maximum && maxCnt <= 3)
                 maxCnt++;
             else if (progBar.Value >= progBar.Maximum && maxCnt > 3)
+            {
                 progBar.Value = progBar.Minimum;
+                maxCnt = 0;
+            }
             else
                 progBar.PerformStep();
 

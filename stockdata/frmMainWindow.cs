@@ -206,5 +206,12 @@ namespace stockdata
             frmL.MdiParent = this;
             frmL.Show();
         }
+
+        private void stDiffRpt_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm종목변동현황 frmL = new frm종목변동현황();
+            frmL.MdiParent = this;
+            frmL.Show();
+        }
     }
 }
