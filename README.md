@@ -5,6 +5,7 @@
 
 이 프로그램은 Windows PC용 클라이언트 프로그램이며, 데이터를 저장하는 중앙 서버 프로그램이 있어야 동작한다.
 
+
 ## Build
 
 * Microsoft(R) Visual Studio Community 2015
@@ -21,9 +22,13 @@ Download setup file and execute it
 
 ## Release History
 
-* 0.0.1
-    * Work in progress
-    * NEW: New 
+* 1.0
+    * 첫 릴리즈
+
+## External Resources
+
+Icon
+    * [SEO Icon](http://www.iconarchive.com/show/large-seo-icons-by-aha-soft/SEO-icon.html) License: Free for non-commercial use.
 
 ## Author
 
