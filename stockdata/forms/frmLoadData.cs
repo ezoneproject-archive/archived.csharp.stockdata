@@ -8,7 +8,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
-namespace stockdata
+namespace stockdata.forms
 {
     public partial class frmLoadData : Form
     {
@@ -217,12 +217,9 @@ namespace stockdata
             //Console.WriteLine(jsonStr);
             //File.WriteAllText("json.txt", jsonStr);
 
-
             if (!client.doWorkDialog())
             {
-                MessageBox.Show(client.ResponseMessage, "Request error!");
-                Console.WriteLine(client.getString());
-
+                client.showErrorDialog();
                 return;
             }
 

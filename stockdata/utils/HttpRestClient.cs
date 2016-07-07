@@ -143,6 +143,15 @@ namespace stockdata.utils
         }
 
         /// <summary>
+        /// 서버 오류가 발생하면 오류 내역 다이얼로그를 표시한다
+        /// </summary>
+        public void showErrorDialog()
+        {
+            if (!isSuccess())
+                new frmTransError(this).ShowDialog();
+        }
+
+        /// <summary>
         /// 서버와 통신
         /// </summary>
         public bool doWork()
@@ -153,6 +162,12 @@ namespace stockdata.utils
             isWorked = true;
             try
             {
+                if (Configure.server.Length == 0)
+                {
+                    ResponseMessage = "Configuration error!";
+                    return isSuccess();
+                }
+
                 request = createWebRequest();
                 // POST or PUT
                 if (Method.Equals(REST_METHOD_CREATE) || Method.Equals(REST_METHOD_UPDATE))
@@ -330,24 +345,37 @@ namespace stockdata.utils
             //request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip");
             request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
 
-            string authorize = getAuthorizationString();
-            if (authorize != null && authorize.Length > 0)
+            // 인증정보가 다른 서버로 새어나가지 않도록 API 서버 주소와 비교한다.
+            string urlBase = Configure.server + "/" + Configure.apiVersion;
+            if (RequestUri.StartsWith(urlBase))
             {
-                // 인식하지 않음
-                // request.Credentials 을 사용할 것을 권장하는데 개발하기 번거로우니, X- 헤더로 대체함
-                //request.PreAuthenticate = true;
-                //request.Headers.Add("Authorization", authorize);
-                request.Headers.Add("X-Authorization", authorize);
-            }
+                // 인증헤더 추가
+                string authorize = getAuthorizationString();
+                if (authorize != null && authorize.Length > 0)
+                {
+                    // 인식하지 않음
+                    // request.Credentials 을 사용할 것을 권장하는데 개발하기 번거로우니, X- 헤더로 대체함
+                    //request.PreAuthenticate = true;
+                    //request.Headers.Add("Authorization", authorize);
+                    request.Headers.Add("X-Authorization", authorize);
+                }
 
-            if (UserEncryptMode)
+                // 암호화 헤더 추가
+                if (UserEncryptMode)
+                {
+                    // 암호화헤더 추가
+                    byte[] key = AESUtil.createRandomKeys(AESUtil.AES_BITS_256);
+                    AESUtil.Key = key;
+                    string rsaEncodedKey = "AES/256/CBC," + RSAEncrypt.Encrypt(key);
+                    Console.WriteLine("X-Encrypt-Key:" + rsaEncodedKey);
+                    request.Headers.Add("X-Encrypt-Key", rsaEncodedKey);
+                }
+            }
+            else
             {
-                // 암호화헤더 추가
-                byte[] key = AESUtil.createRandomKeys(AESUtil.AES_BITS_256);
-                AESUtil.Key = key;
-                string rsaEncodedKey = "AES/256/CBC," + RSAEncrypt.Encrypt(key);
-                Console.WriteLine("X-Encrypt-Key:" + rsaEncodedKey);
-                request.Headers.Add("X-Encrypt-Key", rsaEncodedKey);
+                Console.WriteLine("요청 주소는 API서버가 아님 [" + RequestUri + "]");
+                // 암호화기능 disable
+                UserEncryptMode = false;
             }
 
             return request;
@@ -442,7 +470,7 @@ namespace stockdata.utils
             string encmode = response.GetResponseHeader("X-Encrypted");
             if (UserEncryptMode && encmode != null && encmode.Equals("enabled"))
             {
-                Console.WriteLine("Data encrypted.");
+                Console.WriteLine("Response data encrypted.");
                 byte[] b64dec = Convert.FromBase64String(Encoding.UTF8.GetString(ResponseContent));
                 ResponseContent = AESUtil.Decrypt(b64dec);
             }

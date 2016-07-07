@@ -17,7 +17,7 @@ namespace stockdata.utils
             }
             set
             {
-                ConfigureImpl.set("windowX", ""+value);
+                ConfigureImpl.set("windowX", "" + value);
             }
         }
 
@@ -63,6 +63,18 @@ namespace stockdata.utils
             set
             {
                 ConfigureImpl.set("windowH", "" + value);
+            }
+        }
+
+        public static string lastUpdateCheck
+        {
+            get
+            {
+                return ConfigureImpl.get("lastUpdateCheck");
+            }
+            set
+            {
+                ConfigureImpl.set("lastUpdateCheck", value);
             }
         }
 
@@ -175,7 +187,7 @@ namespace stockdata.utils
                 if (key == null || key.Length == 0)
                     return;
                 while (key.Length < 32)
-                    key+= key;
+                    key += key;
                 if (key.Length > 32)
                     key = key.Substring(0, 32);
 

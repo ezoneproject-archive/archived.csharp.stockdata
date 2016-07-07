@@ -1,4 +1,4 @@
-﻿namespace stockdata
+﻿namespace stockdata.utils
 {
     partial class frmTransWaiting
     {

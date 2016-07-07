@@ -27,7 +27,11 @@ namespace stockdata.utils
                     {
                         HttpRestClient client = new HttpRestClient("publickey");
                         client.UserEncryptMode = false;
-                        if (client.doWorkDialog())
+                        if (!client.doWorkDialog())
+                        {
+                            client.showErrorDialog();
+                        }
+                        else
                         {
                             dynamic json = client.getJsonObject();
                             _RSAPublicKey = (string)json["publickey"];

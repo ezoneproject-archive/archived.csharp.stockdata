@@ -65,9 +65,7 @@ namespace stockdata.forms
 
             if (!client.doWorkDialog())
             {
-                MessageBox.Show(client.ResponseMessage, "Request error!");
-                Console.WriteLine(client.getString());
-
+                client.showErrorDialog();
                 return;
             }
 

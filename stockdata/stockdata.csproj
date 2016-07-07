@@ -110,16 +110,22 @@
     <Compile Include="frmSettings.Designer.cs">
       <DependentUpon>frmSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTransWaiting.cs">
+    <Compile Include="utils\frmTransError.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTransWaiting.Designer.cs">
+    <Compile Include="utils\frmTransError.Designer.cs">
+      <DependentUpon>frmTransError.cs</DependentUpon>
+    </Compile>
+    <Compile Include="utils\frmTransWaiting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="utils\frmTransWaiting.Designer.cs">
       <DependentUpon>frmTransWaiting.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmViewData.cs">
+    <Compile Include="forms\frmViewData.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmViewData.Designer.cs">
+    <Compile Include="forms\frmViewData.Designer.cs">
       <DependentUpon>frmViewData.cs</DependentUpon>
     </Compile>
     <Compile Include="jsonobject\DataMasterRoot.cs" />
@@ -128,10 +134,10 @@
     <Compile Include="utils\AESUtil.cs" />
     <Compile Include="utils\Configure.cs" />
     <Compile Include="utils\ConfigureImpl.cs" />
-    <Compile Include="frmLoadData.cs">
+    <Compile Include="forms\frmLoadData.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLoadData.Designer.cs">
+    <Compile Include="forms\frmLoadData.Designer.cs">
       <DependentUpon>frmLoadData.cs</DependentUpon>
     </Compile>
     <Compile Include="frmMainWindow.cs">
@@ -151,7 +157,7 @@
     <EmbeddedResource Include="forms\frm집계표.resx">
       <DependentUpon>frm집계표.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLoadData.resx">
+    <EmbeddedResource Include="forms\frmLoadData.resx">
       <DependentUpon>frmLoadData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainWindow.resx">
@@ -160,10 +166,13 @@
     <EmbeddedResource Include="frmSettings.resx">
       <DependentUpon>frmSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTransWaiting.resx">
+    <EmbeddedResource Include="utils\frmTransError.resx">
+      <DependentUpon>frmTransError.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="utils\frmTransWaiting.resx">
       <DependentUpon>frmTransWaiting.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmViewData.resx">
+    <EmbeddedResource Include="forms\frmViewData.resx">
       <DependentUpon>frmViewData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

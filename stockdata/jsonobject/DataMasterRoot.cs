@@ -18,7 +18,10 @@ namespace stockdata.jsonobject
                     // 한 번 값을 가져오면 프로그램 재시작까지 캐시한다.
                     HttpRestClient client = new HttpRestClient("master");
                     if (!client.doWorkDialog())
+                    {
+                        client.showErrorDialog();
                         return null;
+                    }
 
                     try
                     {

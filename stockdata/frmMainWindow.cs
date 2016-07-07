@@ -27,7 +27,24 @@ namespace stockdata
                 this.ClientSize = new System.Drawing.Size(Configure.windowW, Configure.windowH);
 
             // 상태바 업데이트
-            toolStripStatusLabel1.Text = "접속서버: " + Configure.server + "/" +Configure.apiVersion;
+            toolStripStatusLabel1.Text = "접속서버: " + Configure.server + "/" + Configure.apiVersion;
+
+            // 업데이트 체크
+            Application.Idle += Check_Version;
+        }
+
+        private bool hiddenUpdateMessage = false;
+        private void Check_Version(object sender, EventArgs e)
+        {
+            Application.Idle -= Check_Version;
+            
+            string curdate = DateTime.Now.ToString("yyyyMMdd");
+            if (!curdate.Equals(Configure.lastUpdateCheck))
+            {
+                hiddenUpdateMessage = true;
+                checkNewVersion_ToolStripMenuItem_Click(sender, e);
+                Configure.lastUpdateCheck = curdate;
+            }
         }
 
         /// <summary>
@@ -106,7 +123,7 @@ namespace stockdata
             HttpRestClient client = new HttpRestClient("clientversion");
             if (!client.doWorkDialog())
             {
-                MessageBox.Show(client.ResponseMessage, "Request error!");
+                client.showErrorDialog();
                 return;
             }
 
@@ -126,14 +143,16 @@ namespace stockdata
 
             if (current >= future)
             {
-                MessageBox.Show("최신 버전을 사용하고 있습니다.", "버전 확인");
+                if (!hiddenUpdateMessage)
+                    MessageBox.Show("최신 버전을 사용하고 있습니다.", "버전 확인");
+                hiddenUpdateMessage = false;
                 return;
             }
             else
             {
                 MessageBox.Show("새 버전이 있습니다. [" + future.ToString() + "]", "버전 확인");
 
-                // 새 버전 다운로드
+                // 새 버전 자동 다운로드
                 client = new HttpRestClient();
                 client.RequestUri = (string)json["clientsetup"];
                 if (!client.doWorkDialog())

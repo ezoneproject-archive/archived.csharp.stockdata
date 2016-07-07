@@ -4,7 +4,7 @@ using stockdata.utils;
 using System;
 using System.Windows.Forms;
 
-namespace stockdata
+namespace stockdata.forms
 {
     public partial class frmViewData : Form
     {
@@ -88,9 +88,7 @@ namespace stockdata
 
             if (!client.doWorkDialog())
             {
-                MessageBox.Show(client.ResponseMessage, "Request error!");
-                Console.WriteLine(client.getString());
-
+                client.showErrorDialog();
                 return;
             }
 
@@ -242,8 +240,7 @@ namespace stockdata
 
             if (!client.doWorkDialog())
             {
-                MessageBox.Show(client.ResponseMessage, "Request error!");
-                Console.WriteLine(client.getString());
+                client.showErrorDialog();
                 return;
             }
 
