@@ -1,4 +1,6 @@
-﻿using stockdata.forms;
+﻿using stockdata.forms.data;
+using stockdata.forms.manager;
+using stockdata.forms.report;
 using stockdata.utils;
 using System;
 using System.IO;
@@ -27,7 +29,24 @@ namespace stockdata
                 this.ClientSize = new System.Drawing.Size(Configure.windowW, Configure.windowH);
 
             // 상태바 업데이트
-            toolStripStatusLabel1.Text = "접속서버: " + Configure.server + "/" +Configure.apiVersion;
+            toolStripStatusLabel1.Text = "접속서버: " + Configure.server + "/" + Configure.apiVersion;
+
+            // 업데이트 체크
+            Application.Idle += Check_Version;
+        }
+
+        private bool hiddenUpdateMessage = false;
+        private void Check_Version(object sender, EventArgs e)
+        {
+            Application.Idle -= Check_Version;
+            
+            string curdate = DateTime.Now.ToString("yyyyMMdd");
+            if (!curdate.Equals(Configure.lastUpdateCheck))
+            {
+                hiddenUpdateMessage = true;
+                checkNewVersion_ToolStripMenuItem_Click(sender, e);
+                Configure.lastUpdateCheck = curdate;
+            }
         }
 
         /// <summary>
@@ -106,7 +125,7 @@ namespace stockdata
             HttpRestClient client = new HttpRestClient("clientversion");
             if (!client.doWorkDialog())
             {
-                MessageBox.Show(client.ResponseMessage, "Request error!");
+                client.showErrorDialog();
                 return;
             }
 
@@ -126,14 +145,16 @@ namespace stockdata
 
             if (current >= future)
             {
-                MessageBox.Show("최신 버전을 사용하고 있습니다.", "버전 확인");
+                if (!hiddenUpdateMessage)
+                    MessageBox.Show("최신 버전을 사용하고 있습니다.", "버전 확인");
+                hiddenUpdateMessage = false;
                 return;
             }
             else
             {
                 MessageBox.Show("새 버전이 있습니다. [" + future.ToString() + "]", "버전 확인");
 
-                // 새 버전 다운로드
+                // 새 버전 자동 다운로드
                 client = new HttpRestClient();
                 client.RequestUri = (string)json["clientsetup"];
                 if (!client.doWorkDialog())
@@ -186,6 +207,11 @@ namespace stockdata
             Configure.windowH = this.ClientSize.Height;
         }
 
+        /// <summary>
+        /// 환경설정 창 열기
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void settingsOpen_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmSettings frmL = new frmSettings();
@@ -193,6 +219,11 @@ namespace stockdata
             frmL.Show();
         }
 
+        /// <summary>
+        /// 서버 자료 조회 창 열기
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void viewServerData_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmViewData frmL = new frmViewData();
@@ -200,6 +231,11 @@ namespace stockdata
             frmL.Show();
         }
 
+        /// <summary>
+        ///  보고서 집계표 창 열기
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void invfgnRpt_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frm집계표 frmL = new frm집계표();
@@ -207,9 +243,38 @@ namespace stockdata
             frmL.Show();
         }
 
+        /// <summary>
+        /// 종목변동현황 창 열기
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void stDiffRpt_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frm종목변동현황 frmL = new frm종목변동현황();
+            frmL.MdiParent = this;
+            frmL.Show();
+        }
+
+        /// <summary>
+        /// API 로그 관리 창 열기
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void apilogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLogManage frmL = new frmLogManage();
+            frmL.MdiParent = this;
+            frmL.Show();
+        }
+
+        /// <summary>
+        /// 오류로그 관리 창 열기
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void errorlogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmErrorManage frmL = new frmErrorManage();
             frmL.MdiParent = this;
             frmL.Show();
         }

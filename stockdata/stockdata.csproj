@@ -74,6 +74,10 @@
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>stockdata_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -92,16 +96,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="forms\frm종목변동현황.cs">
+    <Compile Include="forms\manager\frmErrorManage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\frm종목변동현황.Designer.cs">
+    <Compile Include="forms\manager\frmErrorManage.Designer.cs">
+      <DependentUpon>frmErrorManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\manager\frmErrorMessageDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\manager\frmErrorMessageDetail.Designer.cs">
+      <DependentUpon>frmErrorMessageDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\manager\frmLogManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\manager\frmLogManage.Designer.cs">
+      <DependentUpon>frmLogManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\report\frm종목변동현황.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\report\frm종목변동현황.Designer.cs">
       <DependentUpon>frm종목변동현황.cs</DependentUpon>
     </Compile>
-    <Compile Include="forms\frm집계표.cs">
+    <Compile Include="forms\report\frm집계표.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\frm집계표.Designer.cs">
+    <Compile Include="forms\report\frm집계표.Designer.cs">
       <DependentUpon>frm집계표.cs</DependentUpon>
     </Compile>
     <Compile Include="frmSettings.cs">
@@ -110,16 +132,22 @@
     <Compile Include="frmSettings.Designer.cs">
       <DependentUpon>frmSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTransWaiting.cs">
+    <Compile Include="utils\frmTransError.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTransWaiting.Designer.cs">
+    <Compile Include="utils\frmTransError.Designer.cs">
+      <DependentUpon>frmTransError.cs</DependentUpon>
+    </Compile>
+    <Compile Include="utils\frmTransWaiting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="utils\frmTransWaiting.Designer.cs">
       <DependentUpon>frmTransWaiting.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmViewData.cs">
+    <Compile Include="forms\data\frmViewData.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmViewData.Designer.cs">
+    <Compile Include="forms\data\frmViewData.Designer.cs">
       <DependentUpon>frmViewData.cs</DependentUpon>
     </Compile>
     <Compile Include="jsonobject\DataMasterRoot.cs" />
@@ -128,10 +156,10 @@
     <Compile Include="utils\AESUtil.cs" />
     <Compile Include="utils\Configure.cs" />
     <Compile Include="utils\ConfigureImpl.cs" />
-    <Compile Include="frmLoadData.cs">
+    <Compile Include="forms\data\frmLoadData.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLoadData.Designer.cs">
+    <Compile Include="forms\data\frmLoadData.Designer.cs">
       <DependentUpon>frmLoadData.cs</DependentUpon>
     </Compile>
     <Compile Include="frmMainWindow.cs">
@@ -145,13 +173,22 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="utils\SamFileData.cs" />
-    <EmbeddedResource Include="forms\frm종목변동현황.resx">
+    <EmbeddedResource Include="forms\manager\frmErrorManage.resx">
+      <DependentUpon>frmErrorManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\manager\frmErrorMessageDetail.resx">
+      <DependentUpon>frmErrorMessageDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\manager\frmLogManage.resx">
+      <DependentUpon>frmLogManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\report\frm종목변동현황.resx">
       <DependentUpon>frm종목변동현황.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\frm집계표.resx">
+    <EmbeddedResource Include="forms\report\frm집계표.resx">
       <DependentUpon>frm집계표.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLoadData.resx">
+    <EmbeddedResource Include="forms\data\frmLoadData.resx">
       <DependentUpon>frmLoadData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainWindow.resx">
@@ -160,10 +197,13 @@
     <EmbeddedResource Include="frmSettings.resx">
       <DependentUpon>frmSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTransWaiting.resx">
+    <EmbeddedResource Include="utils\frmTransError.resx">
+      <DependentUpon>frmTransError.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="utils\frmTransWaiting.resx">
       <DependentUpon>frmTransWaiting.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmViewData.resx">
+    <EmbeddedResource Include="forms\data\frmViewData.resx">
       <DependentUpon>frmViewData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

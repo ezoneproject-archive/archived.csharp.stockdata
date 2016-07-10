@@ -5,7 +5,7 @@ using System.Data;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace stockdata.forms
+namespace stockdata.forms.report
 {
     public partial class frm집계표 : Form
     {
@@ -65,9 +65,7 @@ namespace stockdata.forms
 
             if (!client.doWorkDialog())
             {
-                MessageBox.Show(client.ResponseMessage, "Request error!");
-                Console.WriteLine(client.getString());
-
+                client.showErrorDialog();
                 return;
             }
 

@@ -32,6 +32,9 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsOpen_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkNewVersion_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.apilogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.errorlogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exit_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataManage_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registerFile_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,6 +65,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsOpen_ToolStripMenuItem,
             this.checkNewVersion_ToolStripMenuItem,
+            this.manageToolStripMenuItem,
             this.exit_ToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -80,6 +84,29 @@
             this.checkNewVersion_ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.checkNewVersion_ToolStripMenuItem.Text = "새 버전 체크";
             this.checkNewVersion_ToolStripMenuItem.Click += new System.EventHandler(this.checkNewVersion_ToolStripMenuItem_Click);
+            // 
+            // manageToolStripMenuItem
+            // 
+            this.manageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.apilogToolStripMenuItem,
+            this.errorlogToolStripMenuItem});
+            this.manageToolStripMenuItem.Name = "manageToolStripMenuItem";
+            this.manageToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.manageToolStripMenuItem.Text = "시스템관리";
+            // 
+            // apilogToolStripMenuItem
+            // 
+            this.apilogToolStripMenuItem.Name = "apilogToolStripMenuItem";
+            this.apilogToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.apilogToolStripMenuItem.Text = "거래로그";
+            this.apilogToolStripMenuItem.Click += new System.EventHandler(this.apilogToolStripMenuItem_Click);
+            // 
+            // errorlogToolStripMenuItem
+            // 
+            this.errorlogToolStripMenuItem.Name = "errorlogToolStripMenuItem";
+            this.errorlogToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.errorlogToolStripMenuItem.Text = "오류로그";
+            this.errorlogToolStripMenuItem.Click += new System.EventHandler(this.errorlogToolStripMenuItem_Click);
             // 
             // exit_ToolStripMenuItem
             // 
@@ -189,6 +216,9 @@
         private System.Windows.Forms.ToolStripMenuItem stDiffRpt_ToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripMenuItem manageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem apilogToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem errorlogToolStripMenuItem;
     }
 }
 

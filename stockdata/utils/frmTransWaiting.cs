@@ -3,7 +3,7 @@ using System;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace stockdata
+namespace stockdata.utils
 {
     public partial class frmTransWaiting : Form
     {
