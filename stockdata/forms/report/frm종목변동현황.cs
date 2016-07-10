@@ -1,4 +1,5 @@
-﻿using stockdata.jsonobject;
+﻿using stockdata.forms.data;
+using stockdata.jsonobject;
 using stockdata.utils;
 using System;
 using System.Data;
@@ -21,7 +22,10 @@ namespace stockdata.forms.report
         private void btnStcodeSearch_Click(object sender, EventArgs e)
         {
             // 종목코드검색
-            MessageBox.Show("개발중입니다...");
+            frmStockCode frmL = new frmStockCode();
+            frmL.ShowDialog();
+
+            txtStockCodes.Text = frmL.ToString();
         }
 
         private void frm종목변동현황_Resize(object sender, EventArgs e)
