@@ -91,6 +91,7 @@ namespace stockdata.forms.data
             listView1.Columns.Add("stockCate", "소속업종", 9 * 15);
 
             // 종목코드 찾음, 없을경우 새 row에 등록
+            listView1.Items.Clear();
             foreach (StockCodeItem item in data.dataList)
             {
                 ListViewItem listItem = new ListViewItem(item.stockCode);
