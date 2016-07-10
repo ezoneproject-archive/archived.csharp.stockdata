@@ -4,7 +4,7 @@ using stockdata.utils;
 using System;
 using System.Windows.Forms;
 
-namespace stockdata.forms
+namespace stockdata.forms.data
 {
     public partial class frmViewData : Form
     {

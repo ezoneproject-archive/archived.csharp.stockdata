@@ -4,7 +4,7 @@ using System;
 using System.Data;
 using System.Windows.Forms;
 
-namespace stockdata.forms
+namespace stockdata.forms.report
 {
     public partial class frm종목변동현황 : Form
     {

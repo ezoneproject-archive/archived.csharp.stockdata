@@ -1,4 +1,4 @@
-﻿namespace stockdata.forms
+﻿namespace stockdata.forms.report
 {
     partial class frm종목변동현황
     {

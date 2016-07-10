@@ -1,4 +1,6 @@
-﻿using stockdata.forms;
+﻿using stockdata.forms.data;
+using stockdata.forms.manager;
+using stockdata.forms.report;
 using stockdata.utils;
 using System;
 using System.IO;
@@ -205,6 +207,11 @@ namespace stockdata
             Configure.windowH = this.ClientSize.Height;
         }
 
+        /// <summary>
+        /// 환경설정 창 열기
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void settingsOpen_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmSettings frmL = new frmSettings();
@@ -212,6 +219,11 @@ namespace stockdata
             frmL.Show();
         }
 
+        /// <summary>
+        /// 서버 자료 조회 창 열기
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void viewServerData_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmViewData frmL = new frmViewData();
@@ -219,6 +231,11 @@ namespace stockdata
             frmL.Show();
         }
 
+        /// <summary>
+        ///  보고서 집계표 창 열기
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void invfgnRpt_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frm집계표 frmL = new frm집계표();
@@ -226,9 +243,38 @@ namespace stockdata
             frmL.Show();
         }
 
+        /// <summary>
+        /// 종목변동현황 창 열기
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void stDiffRpt_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frm종목변동현황 frmL = new frm종목변동현황();
+            frmL.MdiParent = this;
+            frmL.Show();
+        }
+
+        /// <summary>
+        /// API 로그 관리 창 열기
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void apilogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLogManage frmL = new frmLogManage();
+            frmL.MdiParent = this;
+            frmL.Show();
+        }
+
+        /// <summary>
+        /// 오류로그 관리 창 열기
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void errorlogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmErrorManage frmL = new frmErrorManage();
             frmL.MdiParent = this;
             frmL.Show();
         }

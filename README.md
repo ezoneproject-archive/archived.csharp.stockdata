@@ -27,8 +27,6 @@ Download setup file and execute it
 
 ## External Resources
 
-* Icon
-    * [SEO Icon](http://www.iconarchive.com/show/large-seo-icons-by-aha-soft/SEO-icon.html), License: Free for non-commercial use.
 
 ## Author
 

@@ -1,4 +1,4 @@
-﻿namespace stockdata.forms
+﻿namespace stockdata.forms.data
 {
     partial class frmLoadData
     {

@@ -8,7 +8,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
-namespace stockdata.forms
+namespace stockdata.forms.data
 {
     public partial class frmLoadData : Form
     {

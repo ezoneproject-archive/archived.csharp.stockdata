@@ -75,7 +75,8 @@
     <AssemblyOriginatorKeyFile>stockdata_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Aha-Soft-Large-Seo-SEO.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -95,16 +96,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="forms\frm종목변동현황.cs">
+    <Compile Include="forms\manager\frmErrorManage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\frm종목변동현황.Designer.cs">
+    <Compile Include="forms\manager\frmErrorManage.Designer.cs">
+      <DependentUpon>frmErrorManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\manager\frmErrorMessageDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\manager\frmErrorMessageDetail.Designer.cs">
+      <DependentUpon>frmErrorMessageDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\manager\frmLogManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\manager\frmLogManage.Designer.cs">
+      <DependentUpon>frmLogManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\report\frm종목변동현황.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\report\frm종목변동현황.Designer.cs">
       <DependentUpon>frm종목변동현황.cs</DependentUpon>
     </Compile>
-    <Compile Include="forms\frm집계표.cs">
+    <Compile Include="forms\report\frm집계표.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\frm집계표.Designer.cs">
+    <Compile Include="forms\report\frm집계표.Designer.cs">
       <DependentUpon>frm집계표.cs</DependentUpon>
     </Compile>
     <Compile Include="frmSettings.cs">
@@ -125,10 +144,10 @@
     <Compile Include="utils\frmTransWaiting.Designer.cs">
       <DependentUpon>frmTransWaiting.cs</DependentUpon>
     </Compile>
-    <Compile Include="forms\frmViewData.cs">
+    <Compile Include="forms\data\frmViewData.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\frmViewData.Designer.cs">
+    <Compile Include="forms\data\frmViewData.Designer.cs">
       <DependentUpon>frmViewData.cs</DependentUpon>
     </Compile>
     <Compile Include="jsonobject\DataMasterRoot.cs" />
@@ -137,10 +156,10 @@
     <Compile Include="utils\AESUtil.cs" />
     <Compile Include="utils\Configure.cs" />
     <Compile Include="utils\ConfigureImpl.cs" />
-    <Compile Include="forms\frmLoadData.cs">
+    <Compile Include="forms\data\frmLoadData.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\frmLoadData.Designer.cs">
+    <Compile Include="forms\data\frmLoadData.Designer.cs">
       <DependentUpon>frmLoadData.cs</DependentUpon>
     </Compile>
     <Compile Include="frmMainWindow.cs">
@@ -154,13 +173,22 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="utils\SamFileData.cs" />
-    <EmbeddedResource Include="forms\frm종목변동현황.resx">
+    <EmbeddedResource Include="forms\manager\frmErrorManage.resx">
+      <DependentUpon>frmErrorManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\manager\frmErrorMessageDetail.resx">
+      <DependentUpon>frmErrorMessageDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\manager\frmLogManage.resx">
+      <DependentUpon>frmLogManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\report\frm종목변동현황.resx">
       <DependentUpon>frm종목변동현황.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\frm집계표.resx">
+    <EmbeddedResource Include="forms\report\frm집계표.resx">
       <DependentUpon>frm집계표.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\frmLoadData.resx">
+    <EmbeddedResource Include="forms\data\frmLoadData.resx">
       <DependentUpon>frmLoadData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainWindow.resx">
@@ -175,7 +203,7 @@
     <EmbeddedResource Include="utils\frmTransWaiting.resx">
       <DependentUpon>frmTransWaiting.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\frmViewData.resx">
+    <EmbeddedResource Include="forms\data\frmViewData.resx">
       <DependentUpon>frmViewData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -218,9 +246,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Aha-Soft-Large-Seo-SEO.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

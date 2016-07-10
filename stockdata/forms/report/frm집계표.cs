@@ -5,7 +5,7 @@ using System.Data;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace stockdata.forms
+namespace stockdata.forms.report
 {
     public partial class frm집계표 : Form
     {
