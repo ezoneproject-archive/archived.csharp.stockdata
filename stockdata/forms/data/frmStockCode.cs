@@ -3,20 +3,27 @@ using stockdata.jsonobject;
 using stockdata.utils;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace stockdata.forms.data
 {
     public partial class frmStockCode : Form
     {
-        /// <summary>
-        /// 선택 리스트 목록
-        /// </summary>
-        public List<string> selectedList { get; private set; } = new List<string>();
+
+        private DataTable workTable = new DataTable("stockcode");
 
         public frmStockCode()
         {
             InitializeComponent();
+
+            workTable = new DataTable("stockcode");
+            workTable.Columns.Add("Code", typeof(String));
+            workTable.Columns.Add("Name", typeof(String));
+            workTable.PrimaryKey = new DataColumn[] { workTable.Columns["Code"] };
+
+            listBox1.DataSource = workTable;
+            listBox1.DisplayMember = "Name";
         }
 
         public frmStockCode(string text) : this()
@@ -32,23 +39,17 @@ namespace stockdata.forms.data
         /// <param name="e"></param>
         private void btnClose_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < listView1.SelectedItems.Count; i++)
-            {
-                Console.WriteLine("선택한 항목: " + listView1.SelectedItems[i].Name);
-                selectedList.Add(listView1.SelectedItems[i].Name);
-            }
-            
             this.Close();
         }
 
         public override string ToString()
         {
             string str = "";
-            foreach (string item in selectedList)
+            foreach (DataRow row in workTable.Rows)
             {
                 if (str.Length > 0)
                     str += ",";
-                str += item;
+                str += row["Code"];
             }
 
             return str;
@@ -113,16 +114,49 @@ namespace stockdata.forms.data
         /// <param name="e"></param>
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            btnClose_Click(sender, e);
+            for (int i = 0; i < listView1.SelectedItems.Count; i++)
+            {
+                Console.WriteLine("선택한 항목: " + listView1.SelectedItems[i].Name);
+
+                DataRow workRow = workTable.NewRow();
+                workRow["Code"] = listView1.SelectedItems[i].Name;
+                workRow["Name"] = listView1.SelectedItems[i].SubItems[1].Text;
+
+                workTable.Rows.Add(workRow);
+            }
+
         }
 
+        /// <summary>
+        /// 선택박스에서 항목이 더블클릭되면 해당 항목 삭제
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void listBox1_DoubleClick(object sender, EventArgs e)
+        {
+            for (int i = 0; i < listBox1.SelectedItems.Count; i++)
+            {
+                DataRowView row = (DataRowView)listBox1.SelectedItems[i];
+                Console.WriteLine("Item[" + row["Code"] + "] = " + row["Name"]);
+
+                DataRow r = workTable.Rows.Find(row["Code"]);
+                //Console.WriteLine(r["Code"]);
+                workTable.Rows.Remove(r);
+            }
+        }
+
+        /// <summary>
+        /// 텍스트박스 키보드 입력 체크, 엔터키가 눌리면 조회 처리
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Return)
             {
                 btnSearch_Click(null, null);
             }
-
         }
+
     }
 }
