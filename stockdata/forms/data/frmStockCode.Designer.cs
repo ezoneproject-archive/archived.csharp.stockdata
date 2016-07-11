@@ -33,6 +33,7 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.btnClose = new System.Windows.Forms.Button();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // label1
@@ -78,20 +79,31 @@
             // btnClose
             // 
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(375, 208);
+            this.btnClose.Location = new System.Drawing.Point(375, 326);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 4;
+            this.btnClose.TabIndex = 5;
             this.btnClose.Text = "닫기";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 12;
+            this.listBox1.Location = new System.Drawing.Point(14, 208);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(436, 112);
+            this.listBox1.TabIndex = 4;
+            this.listBox1.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
             // 
             // frmStockCode
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(462, 244);
+            this.ClientSize = new System.Drawing.Size(462, 358);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.btnSearch);
@@ -115,5 +127,6 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
