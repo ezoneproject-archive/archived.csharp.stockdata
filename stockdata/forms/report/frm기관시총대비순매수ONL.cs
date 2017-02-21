@@ -154,8 +154,8 @@ namespace stockdata.forms.report
 
             Console.WriteLine("Continue: " + cpSvrNew7215a.Continue);
 
-            ldateFrom = cpSvrNew7215a.GetHeaderValue(1);
-            ldateTo = cpSvrNew7215a.GetHeaderValue(2);
+            ldateFrom = (long) cpSvrNew7215a.GetHeaderValue(1);
+            ldateTo = (long)cpSvrNew7215a.GetHeaderValue(2);
             {
                 string sdFrom = ldateFrom.ToString();
                 string sdTo = ldateTo.ToString();
@@ -167,14 +167,14 @@ namespace stockdata.forms.report
                 this.dateTo.Value = dTo;
             }
 
-            long dataCount = cpSvrNew7215a.GetHeaderValue(0);
+            long dataCount = (long)cpSvrNew7215a.GetHeaderValue(0);
             txtCnt.Text = dataCount.ToString();
 
             // 시가총액을 구하기 위한 종목데이터 조회
             string stCodeList = "";
             for (int i = 0; i < dataCount && i < 100; i++)
             {
-                string buyCode = cpSvrNew7215a.GetDataValue(4, i);
+                string buyCode = (string) cpSvrNew7215a.GetDataValue(4, i);
                 if (stCodeList.Length > 0)
                     stCodeList += ",";
                 stCodeList += buyCode;
@@ -196,7 +196,7 @@ namespace stockdata.forms.report
                 MessageBox.Show("CybosPlus 거래처리 오류입니다. [" + retStr + "]");
                 return;
             }
-            int stDataCount = stockMst2.GetHeaderValue(0);
+            int stDataCount = (int) stockMst2.GetHeaderValue(0);
 
             dataGrid.Rows.Clear();
             for (int i = 0; i < dataCount; i++)
@@ -211,24 +211,24 @@ namespace stockdata.forms.report
                    6 - (long) 순매수량
                    7 - (long) 순매수대금
                 */
-                string sellCode = cpSvrNew7215a.GetDataValue(0, i);
-                string sellName = cpSvrNew7215a.GetDataValue(1, i);
-                long sellCount = cpSvrNew7215a.GetDataValue(2, i);
-                long sellAmt = cpSvrNew7215a.GetDataValue(3, i);
-                string buyCode = cpSvrNew7215a.GetDataValue(4, i);
-                string buyName = cpSvrNew7215a.GetDataValue(5, i);
-                long buyCount = cpSvrNew7215a.GetDataValue(6, i);
-                long buyAmt = cpSvrNew7215a.GetDataValue(7, i);
+                string sellCode = (string) cpSvrNew7215a.GetDataValue(0, i);
+                string sellName = (string)cpSvrNew7215a.GetDataValue(1, i);
+                long sellCount = (long) cpSvrNew7215a.GetDataValue(2, i);
+                long sellAmt = (long) cpSvrNew7215a.GetDataValue(3, i);
+                string buyCode = (string)cpSvrNew7215a.GetDataValue(4, i);
+                string buyName = (string)cpSvrNew7215a.GetDataValue(5, i);
+                long buyCount = (long) cpSvrNew7215a.GetDataValue(6, i);
+                long buyAmt = (long) cpSvrNew7215a.GetDataValue(7, i);
 
                 long currentAmt = 0; // 현재가
                 decimal totalStockCnt = 0; // 상장주식수
                 for (int j = 0; j < stDataCount; j++)
                 {
-                    string stCode = stockMst2.GetDataValue(0, j);
+                    string stCode = (string)stockMst2.GetDataValue(0, j);
                     if (!stCode.Equals(buyCode))
                         continue;
-                    currentAmt = stockMst2.GetDataValue(3, i); // 3: 현재가
-                    totalStockCnt = stockMst2.GetDataValue(17, i); // 3: 현재가
+                    currentAmt = (long) stockMst2.GetDataValue(3, i); // 3: 현재가
+                    totalStockCnt = (decimal) stockMst2.GetDataValue(17, i); // 3: 현재가
                 }
                 long totalStockAmt = (long)((currentAmt * totalStockCnt) / 1000000); // 시가총액
 
