@@ -278,5 +278,17 @@ namespace stockdata
             frmL.MdiParent = this;
             frmL.Show();
         }
+
+        /// <summary>
+        /// 시총대비 순매수비율 창 열기
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void 시총대비순매수비율ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm기관시총대비순매수ONL frmL = new frm기관시총대비순매수ONL();
+            frmL.MdiParent = this;
+            frmL.Show();
+        }
     }
 }

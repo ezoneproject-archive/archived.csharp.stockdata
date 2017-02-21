@@ -42,6 +42,7 @@
             this.view_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.invfgnRpt_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stDiffRpt_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.시총대비순매수비율ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
@@ -142,7 +143,8 @@
             // 
             this.view_ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.invfgnRpt_ToolStripMenuItem,
-            this.stDiffRpt_ToolStripMenuItem});
+            this.stDiffRpt_ToolStripMenuItem,
+            this.시총대비순매수비율ToolStripMenuItem});
             this.view_ToolStripMenuItem.Name = "view_ToolStripMenuItem";
             this.view_ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.view_ToolStripMenuItem.Text = "조회";
@@ -150,16 +152,23 @@
             // invfgnRpt_ToolStripMenuItem
             // 
             this.invfgnRpt_ToolStripMenuItem.Name = "invfgnRpt_ToolStripMenuItem";
-            this.invfgnRpt_ToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.invfgnRpt_ToolStripMenuItem.Size = new System.Drawing.Size(286, 22);
             this.invfgnRpt_ToolStripMenuItem.Text = "외인기관 집계표";
             this.invfgnRpt_ToolStripMenuItem.Click += new System.EventHandler(this.invfgnRpt_ToolStripMenuItem_Click);
             // 
             // stDiffRpt_ToolStripMenuItem
             // 
             this.stDiffRpt_ToolStripMenuItem.Name = "stDiffRpt_ToolStripMenuItem";
-            this.stDiffRpt_ToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.stDiffRpt_ToolStripMenuItem.Size = new System.Drawing.Size(286, 22);
             this.stDiffRpt_ToolStripMenuItem.Text = "종목변동현황";
             this.stDiffRpt_ToolStripMenuItem.Click += new System.EventHandler(this.stDiffRpt_ToolStripMenuItem_Click);
+            // 
+            // 시총대비순매수비율ToolStripMenuItem
+            // 
+            this.시총대비순매수비율ToolStripMenuItem.Name = "시총대비순매수비율ToolStripMenuItem";
+            this.시총대비순매수비율ToolStripMenuItem.Size = new System.Drawing.Size(286, 22);
+            this.시총대비순매수비율ToolStripMenuItem.Text = "기관시총대비 순매수 Top100(ON-LINE)";
+            this.시총대비순매수비율ToolStripMenuItem.Click += new System.EventHandler(this.시총대비순매수비율ToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -219,6 +228,7 @@
         private System.Windows.Forms.ToolStripMenuItem manageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem apilogToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem errorlogToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 시총대비순매수비율ToolStripMenuItem;
     }
 }
 

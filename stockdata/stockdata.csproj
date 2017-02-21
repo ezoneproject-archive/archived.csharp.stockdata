@@ -120,6 +120,18 @@
     <Compile Include="forms\manager\frmLogManage.Designer.cs">
       <DependentUpon>frmLogManage.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\report\frm시총대비순매수비율.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\report\frm시총대비순매수비율.Designer.cs">
+      <DependentUpon>frm시총대비순매수비율.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\report\frm기관시총대비순매수ONL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\report\frm기관시총대비순매수ONL.Designer.cs">
+      <DependentUpon>frm기관시총대비순매수ONL.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\report\frm종목변동현황.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,6 +204,12 @@
     <EmbeddedResource Include="forms\manager\frmLogManage.resx">
       <DependentUpon>frmLogManage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="forms\report\frm시총대비순매수비율.resx">
+      <DependentUpon>frm시총대비순매수비율.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\report\frm기관시총대비순매수ONL.resx">
+      <DependentUpon>frm기관시총대비순매수ONL.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms\report\frm종목변동현황.resx">
       <DependentUpon>frm종목변동현황.cs</DependentUpon>
     </EmbeddedResource>
@@ -256,6 +274,62 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="CPSYSDIBLib">
+      <Guid>{9C31B76A-7189-49A3-9781-3C6DD6ED5AD3}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="CPUTILLib">
+      <Guid>{2DA9C35C-FE59-4A32-A942-325EE8A6F659}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="DSCBO1Lib">
+      <Guid>{859343F1-08FD-11D4-8231-00105A7C4F8C}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>4</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>6</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
