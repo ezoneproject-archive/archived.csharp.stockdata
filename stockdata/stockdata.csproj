@@ -79,6 +79,23 @@
     </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CPSYSDIBLib">
+      <HintPath>interop\CPSYSDIBLib.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CPTRADELib">
+      <HintPath>interop\CPTRADELib.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CPUTILLib">
+      <HintPath>interop\CPUTILLib.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="DSCBO1Lib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>interop\DSCBO1Lib.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -119,6 +136,18 @@
     </Compile>
     <Compile Include="forms\manager\frmLogManage.Designer.cs">
       <DependentUpon>frmLogManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\report\frm시총대비순매수비율.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\report\frm시총대비순매수비율.Designer.cs">
+      <DependentUpon>frm시총대비순매수비율.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\report\frm기관시총대비순매수ONL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\report\frm기관시총대비순매수ONL.Designer.cs">
+      <DependentUpon>frm기관시총대비순매수ONL.cs</DependentUpon>
     </Compile>
     <Compile Include="forms\report\frm종목변동현황.cs">
       <SubType>Form</SubType>
@@ -192,6 +221,12 @@
     <EmbeddedResource Include="forms\manager\frmLogManage.resx">
       <DependentUpon>frmLogManage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="forms\report\frm시총대비순매수비율.resx">
+      <DependentUpon>frm시총대비순매수비율.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\report\frm기관시총대비순매수ONL.resx">
+      <DependentUpon>frm기관시총대비순매수ONL.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms\report\frm종목변동현황.resx">
       <DependentUpon>frm종목변동현황.cs</DependentUpon>
     </EmbeddedResource>
@@ -256,6 +291,35 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>4</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>6</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
