@@ -98,11 +98,11 @@ namespace stockdata.forms.report
             {
                 DateTime dFrom = this.dateFrom.Value;
                 DateTime dTo = this.dateTo.Value;
-                string sdFrom = dFrom.ToString("yyyyMMdd");
-                string sdTo = dTo.ToString("yyyyMMdd");
+                string sdFrom1 = dFrom.ToString("yyyyMMdd");
+                string sdTo1 = dTo.ToString("yyyyMMdd");
 
-                ldateFrom = long.Parse(sdFrom);
-                ldateTo = long.Parse(sdTo);
+                ldateFrom = long.Parse(sdFrom1);
+                ldateTo = long.Parse(sdTo1);
 
                 if (ldateFrom > ldateTo)
                 {
@@ -130,8 +130,9 @@ namespace stockdata.forms.report
 
             cpSvrNew7215a.SetInputValue(0, marketType);
             cpSvrNew7215a.SetInputValue(1, dateType);
-            if (dateType.Equals("0"))
+            if (dateType.Equals('0'))
             {
+                Console.WriteLine("Set date...");
                 cpSvrNew7215a.SetInputValue(2, ldateFrom);
                 cpSvrNew7215a.SetInputValue(3, ldateTo);
             }
@@ -154,13 +155,13 @@ namespace stockdata.forms.report
 
             Console.WriteLine("Continue: " + cpSvrNew7215a.Continue);
 
-            ldateFrom = (long) cpSvrNew7215a.GetHeaderValue(1);
+            ldateFrom = (long)cpSvrNew7215a.GetHeaderValue(1);
             ldateTo = (long)cpSvrNew7215a.GetHeaderValue(2);
+            string sdFrom = ldateFrom.ToString();
+            string sdTo = ldateTo.ToString();
+            if (sdFrom.Length >= 8 && sdTo.Length >= 8)
             {
-                string sdFrom = ldateFrom.ToString();
-                string sdTo = ldateTo.ToString();
-
-                DateTime dFrom = new DateTime(int.Parse(sdFrom.Substring(0, 4)), int.Parse(sdFrom.Substring(4, 2)), int.Parse(sdFrom.Substring(6,2)));
+                DateTime dFrom = new DateTime(int.Parse(sdFrom.Substring(0, 4)), int.Parse(sdFrom.Substring(4, 2)), int.Parse(sdFrom.Substring(6, 2)));
                 DateTime dTo = new DateTime(int.Parse(sdTo.Substring(0, 4)), int.Parse(sdTo.Substring(4, 2)), int.Parse(sdTo.Substring(6, 2)));
 
                 this.dateFrom.Value = dFrom;
@@ -174,29 +175,31 @@ namespace stockdata.forms.report
             string stCodeList = "";
             for (int i = 0; i < dataCount && i < 100; i++)
             {
-                string buyCode = (string) cpSvrNew7215a.GetDataValue(4, i);
+                string buyCode = (string)cpSvrNew7215a.GetDataValue(4, i);
                 if (stCodeList.Length > 0)
                     stCodeList += ",";
                 stCodeList += buyCode;
             }
-
-            stockMst2.SetInputValue(0, stCodeList);
-            result = stockMst2.BlockRequest();
-            if (result != 0)
+            if (stCodeList.Length > 0)
             {
-                string retStr = "";
-                switch (result)
+                stockMst2.SetInputValue(0, stCodeList);
+                result = stockMst2.BlockRequest();
+                if (result != 0)
                 {
-                    case 1: retStr = "1:통신요청 실패"; break;
-                    case 2: retStr = "2:주문확인창에서 취소"; break;
-                    case 3: retStr = "3:그 외 내부오류"; break;
-                    case 4: retStr = "4:주문요청 개수 초과"; break;
-                    default: retStr = "" + result + ":기타오류"; break;
+                    string retStr = "";
+                    switch (result)
+                    {
+                        case 1: retStr = "1:통신요청 실패"; break;
+                        case 2: retStr = "2:주문확인창에서 취소"; break;
+                        case 3: retStr = "3:그 외 내부오류"; break;
+                        case 4: retStr = "4:주문요청 개수 초과"; break;
+                        default: retStr = "" + result + ":기타오류"; break;
+                    }
+                    MessageBox.Show("CybosPlus 거래처리 오류입니다. [" + retStr + "]");
+                    return;
                 }
-                MessageBox.Show("CybosPlus 거래처리 오류입니다. [" + retStr + "]");
-                return;
             }
-            int stDataCount = (int) stockMst2.GetHeaderValue(0);
+            int stDataCount = (int)stockMst2.GetHeaderValue(0);
 
             dataGrid.Rows.Clear();
             for (int i = 0; i < dataCount; i++)
@@ -211,14 +214,14 @@ namespace stockdata.forms.report
                    6 - (long) 순매수량
                    7 - (long) 순매수대금
                 */
-                string sellCode = (string) cpSvrNew7215a.GetDataValue(0, i);
+                string sellCode = (string)cpSvrNew7215a.GetDataValue(0, i);
                 string sellName = (string)cpSvrNew7215a.GetDataValue(1, i);
-                long sellCount = (long) cpSvrNew7215a.GetDataValue(2, i);
-                long sellAmt = (long) cpSvrNew7215a.GetDataValue(3, i);
+                long sellCount = (long)cpSvrNew7215a.GetDataValue(2, i);
+                long sellAmt = (long)cpSvrNew7215a.GetDataValue(3, i);
                 string buyCode = (string)cpSvrNew7215a.GetDataValue(4, i);
                 string buyName = (string)cpSvrNew7215a.GetDataValue(5, i);
-                long buyCount = (long) cpSvrNew7215a.GetDataValue(6, i);
-                long buyAmt = (long) cpSvrNew7215a.GetDataValue(7, i);
+                long buyCount = (long)cpSvrNew7215a.GetDataValue(6, i);
+                long buyAmt = (long)cpSvrNew7215a.GetDataValue(7, i);
 
                 long currentAmt = 0; // 현재가
                 decimal totalStockCnt = 0; // 상장주식수
@@ -227,8 +230,8 @@ namespace stockdata.forms.report
                     string stCode = (string)stockMst2.GetDataValue(0, j);
                     if (!stCode.Equals(buyCode))
                         continue;
-                    currentAmt = (long) stockMst2.GetDataValue(3, i); // 3: 현재가
-                    totalStockCnt = (decimal) stockMst2.GetDataValue(17, i); // 3: 현재가
+                    currentAmt = (long)stockMst2.GetDataValue(3, i); // 3: 현재가
+                    totalStockCnt = (decimal)stockMst2.GetDataValue(17, i); // 3: 현재가
                 }
                 long totalStockAmt = (long)((currentAmt * totalStockCnt) / 1000000); // 시가총액
 
@@ -238,7 +241,7 @@ namespace stockdata.forms.report
 
                 long buyItemAmt2 = buyItemAmt * 96 / 100; // 매수단가2
 
-                dataGrid.Rows.Add(buyCode, buyName, buyCount, buyAmt, totalStockAmt, buyItemAmt, currentAmt, buyP, buyItemAmt2);
+                dataGrid.Rows.Add(buyCode, buyName, buyCount, buyAmt, totalStockAmt, buyItemAmt, currentAmt, buyP, buyItemAmt2, sellCode, sellName, sellCount, sellAmt);
             }
         }
 
@@ -258,7 +261,7 @@ namespace stockdata.forms.report
             int colCount = dataGrid.Columns.Count;
             for (int i = 0; i < colCount; i++)
             {
-                ((Excel.Range)oSheet.Cells[1, (i+1)]).Value = dataGrid.Columns[i].HeaderText;
+                ((Excel.Range)oSheet.Cells[1, (i + 1)]).Value = dataGrid.Columns[i].HeaderText;
             }
 
             for (int rowIdx = 0; rowIdx < dataGrid.Rows.Count; rowIdx++)
