@@ -28,13 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCybos = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbMarketType = new System.Windows.Forms.ComboBox();
@@ -46,6 +50,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.dataGrid = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnExcel = new System.Windows.Forms.Button();
             this.colBuyStCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBuyStName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBuyCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,7 +60,10 @@
             this.colCurAmt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnExcel = new System.Windows.Forms.Button();
+            this.sellCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sellName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sellCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sellAmt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -158,7 +166,11 @@
             this.colBuyCost,
             this.colCurAmt,
             this.col1,
-            this.col2});
+            this.col2,
+            this.sellCode,
+            this.sellName,
+            this.sellCount,
+            this.sellAmt});
             this.dataGrid.Location = new System.Drawing.Point(8, 66);
             this.dataGrid.Name = "dataGrid";
             this.dataGrid.RowTemplate.Height = 23;
@@ -173,6 +185,16 @@
             this.label3.Size = new System.Drawing.Size(33, 12);
             this.label3.TabIndex = 13;
             this.label3.Text = "조건:";
+            // 
+            // btnExcel
+            // 
+            this.btnExcel.Location = new System.Drawing.Point(728, 33);
+            this.btnExcel.Name = "btnExcel";
+            this.btnExcel.Size = new System.Drawing.Size(75, 23);
+            this.btnExcel.TabIndex = 14;
+            this.btnExcel.Text = "엑셀저장";
+            this.btnExcel.UseVisualStyleBackColor = true;
+            this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click);
             // 
             // colBuyStCode
             // 
@@ -191,10 +213,10 @@
             // 
             // colBuyCount
             // 
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle15.Format = "N0";
-            dataGridViewCellStyle15.NullValue = null;
-            this.colBuyCount.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N0";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colBuyCount.DefaultCellStyle = dataGridViewCellStyle1;
             this.colBuyCount.HeaderText = "순매수량(백주)";
             this.colBuyCount.Name = "colBuyCount";
             this.colBuyCount.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -202,10 +224,10 @@
             // 
             // colBuyAmt
             // 
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle16.Format = "N0";
-            dataGridViewCellStyle16.NullValue = null;
-            this.colBuyAmt.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colBuyAmt.DefaultCellStyle = dataGridViewCellStyle2;
             this.colBuyAmt.HeaderText = "순매수대금(백만원)";
             this.colBuyAmt.Name = "colBuyAmt";
             this.colBuyAmt.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -214,37 +236,37 @@
             // 
             // colPriceTotal
             // 
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle17.Format = "N0";
-            dataGridViewCellStyle17.NullValue = null;
-            this.colPriceTotal.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N0";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colPriceTotal.DefaultCellStyle = dataGridViewCellStyle3;
             this.colPriceTotal.HeaderText = "시가총액(백만원)";
             this.colPriceTotal.Name = "colPriceTotal";
             this.colPriceTotal.Width = 140;
             // 
             // colBuyCost
             // 
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle18.Format = "N0";
-            dataGridViewCellStyle18.NullValue = null;
-            this.colBuyCost.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N0";
+            dataGridViewCellStyle4.NullValue = null;
+            this.colBuyCost.DefaultCellStyle = dataGridViewCellStyle4;
             this.colBuyCost.HeaderText = "매수단가(기관)";
             this.colBuyCost.Name = "colBuyCost";
             this.colBuyCost.Width = 120;
             // 
             // colCurAmt
             // 
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle19.Format = "N0";
-            dataGridViewCellStyle19.NullValue = null;
-            this.colCurAmt.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N0";
+            dataGridViewCellStyle5.NullValue = null;
+            this.colCurAmt.DefaultCellStyle = dataGridViewCellStyle5;
             this.colCurAmt.HeaderText = "현재가";
             this.colCurAmt.Name = "colCurAmt";
             // 
             // col1
             // 
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.col1.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.col1.DefaultCellStyle = dataGridViewCellStyle6;
             this.col1.HeaderText = "매수비율(%)";
             this.col1.Name = "col1";
             this.col1.ToolTipText = "시가총액 대비 매수비율";
@@ -252,22 +274,46 @@
             // 
             // col2
             // 
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle21.Format = "N0";
-            dataGridViewCellStyle21.NullValue = null;
-            this.col2.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "N0";
+            dataGridViewCellStyle7.NullValue = null;
+            this.col2.DefaultCellStyle = dataGridViewCellStyle7;
             this.col2.HeaderText = "매수단가-4%";
             this.col2.Name = "col2";
             // 
-            // btnExcel
+            // sellCode
             // 
-            this.btnExcel.Location = new System.Drawing.Point(728, 33);
-            this.btnExcel.Name = "btnExcel";
-            this.btnExcel.Size = new System.Drawing.Size(75, 23);
-            this.btnExcel.TabIndex = 14;
-            this.btnExcel.Text = "엑셀저장";
-            this.btnExcel.UseVisualStyleBackColor = true;
-            this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click);
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.sellCode.DefaultCellStyle = dataGridViewCellStyle8;
+            this.sellCode.HeaderText = "매도종목코드";
+            this.sellCode.Name = "sellCode";
+            this.sellCode.Width = 120;
+            // 
+            // sellName
+            // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.sellName.DefaultCellStyle = dataGridViewCellStyle9;
+            this.sellName.HeaderText = "매도종목명";
+            this.sellName.Name = "sellName";
+            this.sellName.Width = 140;
+            // 
+            // sellCount
+            // 
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.Format = "N0";
+            dataGridViewCellStyle10.NullValue = null;
+            this.sellCount.DefaultCellStyle = dataGridViewCellStyle10;
+            this.sellCount.HeaderText = "순매도량";
+            this.sellCount.Name = "sellCount";
+            // 
+            // sellAmt
+            // 
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.Format = "N0";
+            dataGridViewCellStyle11.NullValue = null;
+            this.sellAmt.DefaultCellStyle = dataGridViewCellStyle11;
+            this.sellAmt.HeaderText = "순매도대금";
+            this.sellAmt.Name = "sellAmt";
             // 
             // frm기관시총대비순매수ONL
             // 
@@ -308,6 +354,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGrid;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnExcel;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBuyStCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBuyStName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBuyCount;
@@ -317,6 +364,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCurAmt;
         private System.Windows.Forms.DataGridViewTextBoxColumn col1;
         private System.Windows.Forms.DataGridViewTextBoxColumn col2;
-        private System.Windows.Forms.Button btnExcel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sellCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sellName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sellCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sellAmt;
     }
 }

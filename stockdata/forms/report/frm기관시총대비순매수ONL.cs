@@ -241,7 +241,7 @@ namespace stockdata.forms.report
 
                 long buyItemAmt2 = buyItemAmt * 96 / 100; // 매수단가2
 
-                dataGrid.Rows.Add(buyCode, buyName, buyCount, buyAmt, totalStockAmt, buyItemAmt, currentAmt, buyP, buyItemAmt2);
+                dataGrid.Rows.Add(buyCode, buyName, buyCount, buyAmt, totalStockAmt, buyItemAmt, currentAmt, buyP, buyItemAmt2, sellCode, sellName, sellCount, sellAmt);
             }
         }
 
