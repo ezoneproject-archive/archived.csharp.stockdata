@@ -5,6 +5,9 @@
 
 이 프로그램은 Windows PC용 클라이언트 프로그램이며, 데이터를 저장하는 중앙 서버 프로그램이 있어야 동작한다.
 
+1. x86으로 컴파일해야 한다.
+2. 관리자 권한으로 실행해야 한다.
+* 프로그램 실행 시 자동으로 관리자 권한을 부여하기 위해서는 프로젝트 우클릭 -> 추가 -> 새 항목 -> 응용프로그램 매니페스트 파일(app.manifest)을 추가하고 trustInfo/security/requestedPrivileges/requestedExecutionLevel 태그의 level 값을 requireAdministrator 로 변경한다.
 
 ## Build
 
